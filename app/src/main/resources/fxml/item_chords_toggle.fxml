@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.text.Font?>
+
+
+<CheckBox mnemonicParsing="false" text="chords type" underline="true" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <font>
+      <Font name="Segoe UI Semilight" size="18.0" />
+   </font>
+</CheckBox>

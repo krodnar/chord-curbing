@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName = "$moduleName/me.krodnar.sevenkey.main.App"
+sourceCompatibility = 11
+targetCompatibility = 11
+version '0.3.4'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':core')
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

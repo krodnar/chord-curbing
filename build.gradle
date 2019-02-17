@@ -1,0 +1,21 @@
+import org.gradle.internal.os.OperatingSystem
+
+ext {
+    operatingSystem = OperatingSystem.current()
+}
+
+group 'me.krodnar'
+version '0.4.4'
+
+wrapper{
+    gradleVersion = '5.2'
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    group 'me.krodnar.sevenkey'
+}

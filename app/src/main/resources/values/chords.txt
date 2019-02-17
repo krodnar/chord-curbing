@@ -1,0 +1,155 @@
+#Triads
+Major = R + 4s + 3s
+Minor = R + 3s + 4s
+Augmented = R + 4s + 4s
+Diminished = R + 3s + 3s
+Lydian = R + 4s + 2s
+
+#Suspended Chords
+Sus4 = R + 5s + 2s
+Sus2 = R + 2s + 5s
+
+#Sixth Chords
+Major = R + 4s + 3s + 2s
+Minor = R + 3s + 4s + 2s
+
+#Seventh Chords
+Maj7 = R + 4s + 3s + 4s
+Maj7(#5) = R + 4s + 4s + 3s
+Maj7(b5) = R + 4s + 2s + 5s
+Min7 = R + 3s + 4s + 3s
+
+Dom7 = R + 4s + 3s + 3s
+Dom7(b5) = R + 4s + 2s + 4s
+Dom7(#5) = R + 4s + 4s + 2s
+
+Min7(b5) = R + 3s + 3s + 4s
+Min7(b5)(bb7) = R + 3s + 3s + 3s
+
+MinMaj7= R + 3s + 4s + 4s
+MinMaj7(b5) = R + 3s + 3s + 5s
+
+Aug7 = R + 4s + 4s + 2s
+AugMaj7 = R + 4s + 4s + 3s
+add6 = R + 4s + 3s + 2s + 1s
+
+#Ninth Chords
+Maj7(9) = R + 4s + 3s + 4s + 3s
+Maj7(#5)(9) = R + 4s + 4s + 3s + 3s
+Maj7(b5)(9) = R + 4s + 2s + 5s + 3s
+Maj7(b9)  = R + 4s + 3s + 4s + 2s
+Maj7(#5)(b9)  = R + 4s + 4s + 3s + 2s
+Maj7(b5)(b9)  = R + 4s + 2s + 5s + 2s
+
+Min7(9) = R + 3s + 4s + 3s + 4s
+Min7(b5)(9) = R + 3s + 3s + 4s + 4s
+Min7(b9)  = R + 3s + 4s + 3s + 3s
+Min7(b5)(b9) = R + 3s + 3s + 4s + 3s
+
+Dom7(9) = R + 4s + 3s + 3s + 4s
+Dom7(b5)(9) = R + 4s + 2s + 4s + 4s
+Dom7(#5)(9) = R + 4s + 4s + 2s + 4s
+
+Dom7(b9) = R + 4s + 3s + 3s + 3s
+Dom7(b5)(b9) = R + 4s + 2s + 4s + 3s
+
+Dim7(9) = R + 3s + 3s + 3s + 5s
+Dim7(b9) = R + 3s + 3s + 3s + 4s
+Aug7(9)  = R + 4s + 4s + 2s + 4s
+Aug7(b9)  = R + 4s + 4s + 2s + 3s
+AugMaj7(9) = R + 4s + 4s + 3s + 3s
+AugMaj7(b9) = R + 4s + 4s + 3s + 2s
+
+#Eleven Chords
+maj7(9)(11) = R + 4s + 3s + 4s + 3s + 3s
+maj7(9)(#11) = R + 4s + 3s + 4s + 3s + 4s
+Maj7(#5)(9)(11) = R + 4s + 4s + 3s + 3s + 3s
+Maj7(#5)(9)(#11) = R + 4s + 4s + 3s + 3s + 4s
+Maj7(b5)(9)(11) = R + 4s + 2s + 5s + 3s + 3s
+Maj7(b5)(9)(#11) = R + 4s + 2s + 5s + 3s + 4s
+Maj7(b9)(11) = R + 4s + 3s + 4s + 2s + 4s
+maj7(b9)(#11) = R + 4s + 3s + 4s + 2s + 5s
+Maj7(#5)(b9)(11) = R + 4s + 4s + 3s + 2s + 4s
+Maj7(#5)(b9)(#11) = R + 4s + 4s + 3s + 2s + 5s
+Maj7(b5)(b9)(11) = R + 4s + 2s + 5s + 2s + 4s
+Maj7(b5)(b9)(#11) = R + 4s + 2s + 5s + 2s + 5s
+Min7(9)(11) = R + 3s + 4s + 3s + 4s + 3s
+Min7(9)(#11) = R + 3s + 4s + 3s + 4s + 4s
+Min7(b5)(9)(11) = R + 3s + 3s + 4s + 4s + 3s
+Min7(b5)(9)(#11) = R + 3s + 3s + 4s + 4s + 4s
+Min7(b9)(11) = R + 3s + 4s + 3s + 3s + 4s
+Min7(b9)(#11) = R + 3s + 4s + 3s + 3s + 5s
+Min7(b5)(b9)(11) = R + 3s + 3s + 4s + 3s + 4s
+Min7(b5)(b9)(#11) = R + 3s + 3s + 4s + 3s + 5s
+
+Dom7(9)(11) = R + 4s + 3s + 3s + 4s + 3s
+Dom7(9)(#11) = R + 4s + 3s + 3s + 4s + 4s
+Dom7(b5)(9)(11) = R + 4s + 2s + 4s + 4s + 3s
+Dom7(b5)(9)(#11) = R + 4s + 2s + 4s + 4s + 4s
+Dom7(#5)(9)(11) = R + 4s + 4s + 2s + 4s + 3s
+Dom7(#5)(9)(#11) = R + 4s + 4s + 2s + 4s + 4s
+Dom7(b9)(11) = R + 4s + 3s + 3s + 3s + 4s
+Dom7(b9)(#11) = R + 4s + 3s + 3s + 3s + 5s
+Dom7(b5)(b9)(11) = R + 4s + 2s + 4s + 3s + 4s
+Dom7(b5(b9)(#11) = R + 4s + 2s + 4s + 3s + 5s
+
+dim7(9)(11) = R + 3s + 3s + 3s + 5s + 3s
+dim7(9)(#11) = R + 3s + 3s + 3s + 5s + 4s
+dim7(b9)(11) = R + 3s + 3s + 3s + 4s + 4s
+dim7(b9)(#11) = R + 3s + 3s + 3s + 4s + 5s
+
+Aug7(9)(11) = R + 4s + 4s + 2s + 4s + 3s
+Aug7(9)(#11) = R + 4s + 4s + 2s + 4s + 4s
+Aug7(b9)(11) = R + 4s + 4s + 2s + 3s + 4s
+Aug7(b9)(#11) = R + 4s + 4s + 2s + 3s + 5s
+AugMaj7(9)(11) = R + 4s + 4s + 3s + 3s + 3s
+AugMaj7(9)(#11) = R + 4s + 4s + 3s + 3s + 4s
+AugMaj7(b9)(11) = R + 4s + 4s + 3s + 2s + 4s
+AugMaj7(b9)(#11) = R + 4s + 4s + 3s + 2s + 5s
+
+#Thirteenth Chords
+maj7(9)(11) (13) = R + 4s + 3s + 4s + 3s + 3s + 4s
+maj7(9)(#11) (13) = R + 4s + 3s + 4s + 3s + 4s + 3s
+Maj7(#5)(9)(11) (13) = R + 4s + 4s + 3s + 3s + 3s + 4s
+Maj7(#5)(9)(#11) (13) = R + 4s + 4s + 3s + 3s + 4s + 3s
+Maj7(b5)(9)(11) (13) = R + 4s + 2s + 5s + 3s + 3s + 4s
+Maj7(b5)(9)(#11) (13) = R + 4s + 2s + 5s + 3s + 4s + 3s
+Maj7(b9)(11) (13) = R + 4s + 3s + 4s + 2s + 4s + 4s
+maj7(b9)(#11) (13) = R + 4s + 3s + 4s + 2s + 5s +3s
+Maj7(#5)(b9)(11) (13) = R + 4s + 4s + 3s + 2s + 4s + 4s
+Maj7(#5)(b9)(#11) (13) = R + 4s + 4s + 3s + 2s + 5s + 3s
+Maj7(b5)(b9)(11) (13) = R + 4s + 2s + 5s + 2s + 4s + 4s
+Maj7(b5)(b9)(#11) (13) = R + 4s + 2s + 5s + 2s + 5s + 3s
+Min7(9)(11) (13) = R + 3s + 4s + 3s + 4s + 3s + 4s
+Min7(9)(#11) (13) = R + 3s + 4s + 3s + 4s + 4s + 3s
+Min7(b5)(9)(11) (13) = R + 3s + 3s + 4s + 4s + 3s + 4s
+Min7(b5)(9)(#11) (13) = R + 3s + 3s + 4s + 4s + 4s + 3s
+Min7(b9)(11) (13) = R + 3s + 4s + 3s + 3s + 4s + 4s
+Min7(b9)(#11) (13) = R + 3s + 4s + 3s + 3s + 5s + 3s
+Min7(b5)(b9)(11) (13) = R + 3s + 3s + 4s + 3s + 4s + 4s
+Min7(b5)(b9)(#11) (13) = R + 3s + 3s + 4s + 3s + 5s + 3s
+
+Dom7(9)(11) (13) = R + 4s + 3s + 3s + 4s + 3s + 4s
+Dom7(9)(#11) (13) = R + 4s + 3s + 3s + 4s + 4s + 3s
+Dom7(b5)(9)(11) (13) = R + 4s + 2s + 4s + 4s + 3s + 4s
+Dom7(b5)(9)(#11) (13) = R + 4s + 2s + 4s + 4s + 4s + 3s
+Dom7(#5)(9)(11) (13) = R + 4s + 4s + 2s + 4s + 3s + 4s
+Dom7(#5)(9)(#11) (13) = R + 4s + 4s + 2s + 4s + 4s + 3s
+Dom7(b9)(11) (13) = R + 4s + 3s + 3s + 3s + 4s + 4s
+Dom7(b9)(#11) (13) = R + 4s + 3s + 3s + 3s + 5s + 3s
+Dom7(b5)(b9)(11) (13) = R + 4s + 2s + 4s + 3s + 4s + 4s
+Dom7(b5(b9)(#11) (13) = R + 4s + 2s + 4s + 3s + 5s + 3s
+
+dim7(9)(11) (13) = R + 3s + 3s + 3s + 5s + 3s + 4s
+dim7(9)(#11) (13) = R + 3s + 3s + 3s + 5s + 4s + 3s
+dim7(b9)(11) (13) = R + 3s + 3s + 3s + 4s + 4s + 4s
+dim7(b9)(#11) (13) = R + 3s + 3s + 3s + 4s + 5s + 3s
+
+Aug7(9)(11) (13) = R + 4s + 4s + 2s + 4s + 3s + 4s
+Aug7(9)(#11) (13) = R + 4s + 4s + 2s + 4s + 4s + 3s
+Aug7(b9)(11) (13) = R + 4s + 4s + 2s + 3s + 4s + 4s
+Aug7(b9)(#11) (13) = R + 4s + 4s + 2s + 3s + 5s + 3s
+AugMaj7(9)(11) (13) = R + 4s + 4s + 3s + 3s + 3s + 4s
+AugMaj7(9)(#11) (13) = R + 4s + 4s + 3s + 3s + 4s + 3s
+AugMaj7(b9)(11) (13) = R + 4s + 4s + 3s + 2s + 4s + 4s
+AugMaj7(b9)(#11) (13) = R + 4s + 4s + 3s + 2s + 5s + 3s

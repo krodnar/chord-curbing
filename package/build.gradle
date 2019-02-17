@@ -1,0 +1,112 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+apply plugin: 'base'
+version '0.3.1'
+
+ext {
+    mainClass = 'me.krodnar.sevenkey.main.App'
+    appModule = rootProject.name + ".app"
+
+    appLibs = file("${project(':app').buildDir}/libs")
+    coreLibs = file("${project(':core').buildDir}/libs")
+
+    appVersion = rootProject.version
+
+    winIconName = 'favicon.ico'
+    innoScriptName = 'sevenkey.iss'
+    innoOutDir = 'win'
+}
+
+// gradle does not load local.properties (or am i missing something?) so i load them manually
+Properties locProp = new Properties()
+def propertiesFile = rootProject.file('local.properties')
+if (propertiesFile.exists()) {
+    def stream = propertiesFile.newDataInputStream()
+    locProp.load(stream)
+    stream.close()
+}
+
+def javaHome = hasProperty('org.gradle.java.home') ? getProperty('org.gradle.java.home') : System.getenv('JAVA_HOME')
+def fxJmods = locProp.containsKey('path.to.fx.mods') ? locProp.getProperty('path.to.fx.mods') : System.getenv('PATH_TO_FX_MODS')
+def innoSetupPath = locProp.containsKey('iscc.dir') ? locProp.getProperty('iscc.dir') : null
+
+task checkEnvironment() {
+
+    if (javaHome == null) {
+        throw new GradleException("java path is not defined.")
+    }
+
+    if (fxJmods == null) {
+        throw new GradleException("jmods path is not defined.")
+    }
+}
+
+task copyDependencies(type: Copy, dependsOn: [checkEnvironment, ':app:jar']) {
+
+    doFirst {
+        delete "${buildDir}/dist"
+    }
+
+    from appLibs
+    from coreLibs
+    into "${buildDir}/libs"
+}
+
+task jlink(type: Exec, dependsOn: copyDependencies) {
+
+    workingDir = 'build'
+
+    commandLine "${javaHome}/bin/jlink",
+            '--module-path', "libs${File.pathSeparatorChar}${fxJmods}",
+            '--add-modules', "${appModule}",
+            '--output', "dist",
+            '--launcher', "${rootProject.name}=${appModule}/${mainClass}",
+            '--strip-debug',
+            '--compress', '2',
+            '--no-header-files',
+            '--no-man-pages'
+}
+
+task prepareBundles(dependsOn: ':app:jar') {
+}
+
+task createBundles(dependsOn: [prepareBundles, jlink]) {
+
+}
+
+if (operatingSystem.isWindows()) {
+    if (innoSetupPath == null) {
+        throw new GradleException('Use local.properties or -Piscc.dir to specify the directory of Inno Setup')
+    }
+
+    task prepareInnoSetup() {
+        copy {
+            from('scripts') {
+                include innoScriptName
+                filter(ReplaceTokens, tokens: [
+                        'VERSION': rootProject.version,
+                        'OUTPUT' : innoOutDir,
+                        'ICON'   : winIconName
+                ])
+            }
+
+            into buildDir
+        }
+
+        copy {
+            from('icons') {
+                include winIconName
+            }
+
+            into "${buildDir}/dist"
+        }
+    }
+
+    prepareBundles.finalizedBy prepareInnoSetup
+
+    task completeInnoSetup(type: Exec, dependsOn: prepareBundles) {
+        commandLine "\"${innoSetupPath}\\iscc\"", "\"${buildDir}\\${innoScriptName}\""
+    }
+
+    createBundles.finalizedBy completeInnoSetup
+}
