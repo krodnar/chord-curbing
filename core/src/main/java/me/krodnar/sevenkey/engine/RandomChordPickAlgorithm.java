@@ -15,7 +15,7 @@ public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 
 	private List<Chord> chordsPool;
 	private List<Integer> inversionsPool;
-	private List<NotePosition> notePositionsPool;
+	private List<NoteTonic> noteTonicsPool;
 
 	private int pickedInversion;
 	private ArrayList<Integer> availableInversions;
@@ -35,8 +35,8 @@ public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 			throw new IllegalStateException("No inversions in pool.");
 		}
 
-		if (notePositionsPool == null || notePositionsPool.isEmpty()) {
-			throw new IllegalStateException("No positions in pool.");
+		if (noteTonicsPool == null || noteTonicsPool.isEmpty()) {
+			throw new IllegalStateException("No tonics in pool.");
 		}
 
 		availableInversions = new ArrayList<>(inversionsPool);
@@ -66,7 +66,7 @@ public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 		for (int i = startNoteIndex; i < endNoteIndex; i++) {
 			Note note = Note.getByIndex(i);
 
-			if (!notePositionsPool.contains(note.getPosition())) {
+			if (!noteTonicsPool.contains(note.getTonic())) {
 				continue;
 			}
 
@@ -115,7 +115,7 @@ public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 	}
 
 	@Override
-	public void setNotePositionsPool(List<NotePosition> notePositionsPool) {
-		this.notePositionsPool = notePositionsPool;
+	public void setNoteTonicsPool(List<NoteTonic> noteTonicsPool) {
+		this.noteTonicsPool = noteTonicsPool;
 	}
 }

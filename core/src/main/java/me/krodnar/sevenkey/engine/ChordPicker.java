@@ -2,7 +2,7 @@ package me.krodnar.sevenkey.engine;
 
 import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.NotePosition;
+import me.krodnar.sevenkey.models.NoteTonic;
 import me.krodnar.sevenkey.models.Octave;
 
 import java.util.*;
@@ -20,14 +20,14 @@ public class ChordPicker {
 
 	private Map<Chord, Boolean> chordsPool = new HashMap<>();
 	private List<Integer> inversionsPool = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
-	private Map<NotePosition, Boolean> notePositionsPool = new HashMap<>();
+	private Map<NoteTonic, Boolean> noteTonicsPool = new HashMap<>();
 
 	public ChordPicker(List<Chord> chords) {
 		this.chords = chords;
 		processChords(chords);
 
-		for (NotePosition position : NotePosition.values()) {
-			notePositionsPool.put(position, true);
+		for (NoteTonic tonic : NoteTonic.values()) {
+			noteTonicsPool.put(tonic, true);
 		}
 	}
 
@@ -37,14 +37,14 @@ public class ChordPicker {
 			if (value) chords.add(key);
 		});
 
-		List<NotePosition> notePositions = new ArrayList<>();
-		notePositionsPool.forEach((key, value) -> {
-			if (value) notePositions.add(key);
+		List<NoteTonic> noteTonics = new ArrayList<>();
+		noteTonicsPool.forEach((key, value) -> {
+			if (value) noteTonics.add(key);
 		});
 
 		algorithm.setChordsPool(chords);
 		algorithm.setInversionsPool(inversionsPool);
-		algorithm.setNotePositionsPool(notePositions);
+		algorithm.setNoteTonicsPool(noteTonics);
 		return algorithm.getChord();
 	}
 
@@ -78,12 +78,12 @@ public class ChordPicker {
 		inversionsPool.remove(((Integer) inversion));
 	}
 
-	public void includeNotePosition(NotePosition position) {
-		notePositionsPool.put(position, true);
+	public void includeNoteTonic(NoteTonic tonic) {
+		noteTonicsPool.put(tonic, true);
 	}
 
-	public void excludeNotePosition(NotePosition position) {
-		notePositionsPool.put(position, false);
+	public void excludeNoteTonic(NoteTonic tonic) {
+		noteTonicsPool.put(tonic, false);
 	}
 
 	public void setStartOctave(Octave startOctave) {

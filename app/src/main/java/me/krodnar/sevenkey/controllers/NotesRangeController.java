@@ -8,7 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.HBox;
 import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.engine.ChordPicker;
-import me.krodnar.sevenkey.models.NotePosition;
+import me.krodnar.sevenkey.models.NoteTonic;
 import me.krodnar.sevenkey.models.Octave;
 
 import java.net.URL;
@@ -41,12 +41,12 @@ public class NotesRangeController implements Initializable {
 	}
 
 	private void initNotePositions() {
-		for (NotePosition position : NotePosition.values()) {
+		for (NoteTonic position : NoteTonic.values()) {
 			CheckBox checkBox = new CheckBox(position.getNotation());
 			checkBox.selectedProperty().set(true);
 			checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-				if (newValue) picker.includeNotePosition(position);
-				else picker.excludeNotePosition(position);
+				if (newValue) picker.includeNoteTonic(position);
+				else picker.excludeNoteTonic(position);
 			});
 
 			notePositionsRoot.getChildren().add(checkBox);

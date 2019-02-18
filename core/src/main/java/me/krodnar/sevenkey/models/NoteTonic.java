@@ -1,7 +1,7 @@
 package me.krodnar.sevenkey.models;
 
 
-public enum NotePosition {
+public enum NoteTonic {
 	C("C"),
 	CS("C#"),
 	D("D"),
@@ -17,7 +17,7 @@ public enum NotePosition {
 
 	private String notation;
 
-	NotePosition(String notation) {
+	NoteTonic(String notation) {
 		this.notation = notation;
 	}
 

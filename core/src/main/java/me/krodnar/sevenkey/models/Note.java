@@ -199,8 +199,8 @@ public enum Note {
 		return octave;
 	}
 
-	public NotePosition getPosition() {
-		return NotePosition.values()[index % 12];
+	public NoteTonic getTonic() {
+		return NoteTonic.values()[index % 12];
 	}
 
 	public String getNaming() {
