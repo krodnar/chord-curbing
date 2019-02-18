@@ -14,43 +14,25 @@ import me.krodnar.sevenkey.models.Octave;
 import java.net.URL;
 import java.util.*;
 
-public class NotesRangeController implements Initializable {
+public class RangeController implements Initializable {
 
 	private static final Octave DEF_START_OCTAVE = Octave.CM;
 	private static final Octave DEF_END_OCTAVE = Octave.C9;
 
-	private Trainer trainer;
 	private ChordPicker picker;
 
 	@FXML
 	private ChoiceBox<Octave> startOctaveChoice;
 	@FXML
 	private ChoiceBox<Octave> endOctaveChoice;
-	@FXML
-	private HBox notePositionsRoot;
 
-	public NotesRangeController(Trainer trainer) {
-		this.trainer = trainer;
-		this.picker = trainer.getPicker();
+	public RangeController(ChordPicker picker) {
+		this.picker = picker;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initOctavesRange();
-		initNotePositions();
-	}
-
-	private void initNotePositions() {
-		for (NoteTonic position : NoteTonic.values()) {
-			CheckBox checkBox = new CheckBox(position.getNotation());
-			checkBox.selectedProperty().set(true);
-			checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-				if (newValue) picker.includeNoteTonic(position);
-				else picker.excludeNoteTonic(position);
-			});
-
-			notePositionsRoot.getChildren().add(checkBox);
-		}
 	}
 
 	private void initOctavesRange() {

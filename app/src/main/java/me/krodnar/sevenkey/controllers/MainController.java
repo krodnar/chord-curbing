@@ -32,7 +32,9 @@ public class MainController implements Initializable {
 	@FXML
 	private FlowPane devicesRoot;
 	@FXML
-	private FlowPane notesRangeRoot;
+	private FlowPane octavesRangeRoot;
+	@FXML
+	private HBox tonicsRoot;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +45,23 @@ public class MainController implements Initializable {
 		initNotesRange();
 		initPicker();
 		initInversions();
+		initTonics();
+	}
+
+	private void initTonics() {
+		FXMLLoader loader = new FXMLLoader(Resources.layout.TONICS.url());
+		loader.setResources(Resources.getBundle());
+
+		NoteTonicsController controller = new NoteTonicsController(trainer.getPicker());
+		loader.setController(controller);
+		loader.setRoot(tonicsRoot);
+
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void initInversions() {
@@ -79,9 +98,9 @@ public class MainController implements Initializable {
 		FXMLLoader loader = new FXMLLoader(Resources.layout.NOTES.url());
 		loader.setResources(Resources.getBundle());
 
-		NotesRangeController controller = new NotesRangeController(trainer);
+		RangeController controller = new RangeController(trainer.getPicker());
 		loader.setController(controller);
-		loader.setRoot(notesRangeRoot);
+		loader.setRoot(octavesRangeRoot);
 
 		try {
 			loader.load();
