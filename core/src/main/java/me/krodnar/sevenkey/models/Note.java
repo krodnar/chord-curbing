@@ -199,6 +199,10 @@ public enum Note {
 		return octave;
 	}
 
+	public NotePosition getPosition() {
+		return NotePosition.values()[index % 12];
+	}
+
 	public String getNaming() {
 		return notation + octave.getIndex();
 	}
