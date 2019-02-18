@@ -10,8 +10,8 @@ Sus4 = R + 5s + 2s
 Sus2 = R + 2s + 5s
 
 #Sixth Chords
-Major = R + 4s + 3s + 2s
-Minor = R + 3s + 4s + 2s
+Maj6 = R + 4s + 3s + 2s
+Min6 = R + 3s + 4s + 2s
 
 #Seventh Chords
 Maj7 = R + 4s + 3s + 4s

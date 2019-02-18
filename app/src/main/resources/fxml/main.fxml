@@ -10,7 +10,12 @@
       <VBox fx:id="pickerRoot" />
       <HBox fx:id="inversionsRoot" />
       <VBox fx:id="trainerRoot" />
-      <FlowPane fx:id="settingsRoot" />
+      <HBox>
+         <children>
+            <FlowPane fx:id="devicesRoot" />
+            <FlowPane fx:id="notesRangeRoot" />
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
