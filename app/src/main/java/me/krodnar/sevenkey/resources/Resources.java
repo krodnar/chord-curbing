@@ -15,7 +15,7 @@ public final class Resources {
 		public static ResourceDescriptor PICKER = new ResourceDescriptor("/fxml/picker.fxml");
 		public static ResourceDescriptor TRAINER = new ResourceDescriptor("/fxml/trainer.fxml");
 		public static ResourceDescriptor INVERSIONS = new ResourceDescriptor("/fxml/inversions.fxml");
-		public static ResourceDescriptor NOTES = new ResourceDescriptor("/fxml/notes_range.fxml");
+		public static ResourceDescriptor NOTES = new ResourceDescriptor("/fxml/range.fxml");
 
 		public static ResourceDescriptor ITEM_INVERSION = new ResourceDescriptor("/fxml/item_inversion.fxml");
 		public static ResourceDescriptor ITEM_CHORDS_TOGGLE= new ResourceDescriptor("/fxml/item_chords_toggle.fxml");
