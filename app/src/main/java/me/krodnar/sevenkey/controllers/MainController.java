@@ -7,11 +7,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import me.krodnar.sevenkey.engine.ChordPicker;
 import me.krodnar.sevenkey.core.Trainer;
+import me.krodnar.sevenkey.engine.ChordPicker;
+import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.resources.Resources;
 import me.krodnar.sevenkey.tools.ChordReader;
-import me.krodnar.sevenkey.models.Chord;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,14 +30,17 @@ public class MainController implements Initializable {
 	@FXML
 	private VBox trainerRoot;
 	@FXML
-	private FlowPane settingsRoot;
+	private FlowPane devicesRoot;
+	@FXML
+	private FlowPane notesRangeRoot;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		trainer = createTrainer();
 
 		initTrainer();
-		initSettings();
+		initDevicesList();
+		initNotesRange();
 		initPicker();
 		initInversions();
 	}
@@ -72,13 +75,28 @@ public class MainController implements Initializable {
 		}
 	}
 
-	private void initSettings() {
-		FXMLLoader loader = new FXMLLoader(Resources.layout.SETTINGS.url());
+	private void initNotesRange() {
+		FXMLLoader loader = new FXMLLoader(Resources.layout.NOTES.url());
 		loader.setResources(Resources.getBundle());
 
-		SettingsController controller = new SettingsController(trainer);
+		NotesRangeController controller = new NotesRangeController(trainer);
 		loader.setController(controller);
-		loader.setRoot(settingsRoot);
+		loader.setRoot(notesRangeRoot);
+
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void initDevicesList() {
+		FXMLLoader loader = new FXMLLoader(Resources.layout.DEVICES.url());
+		loader.setResources(Resources.getBundle());
+
+		DeviceListController controller = new DeviceListController(trainer);
+		loader.setController(controller);
+		loader.setRoot(devicesRoot);
 
 		try {
 			loader.load();
