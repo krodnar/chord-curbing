@@ -4,11 +4,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.engine.ChordPicker;
+import me.krodnar.sevenkey.main.App;
+import me.krodnar.sevenkey.main.ScreenManager;
 import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.resources.Resources;
 import me.krodnar.sevenkey.tools.ChordReader;
@@ -24,28 +27,33 @@ public class MainController implements Initializable {
 	private Trainer trainer;
 
 	@FXML
-	private VBox pickerRoot;
+	private HBox pickerRoot;
 	@FXML
 	private HBox inversionsRoot;
 	@FXML
 	private VBox trainerRoot;
 	@FXML
-	private FlowPane devicesRoot;
+	private Button settingsButton;
 	@FXML
 	private FlowPane octavesRangeRoot;
 	@FXML
 	private HBox tonicsRoot;
 
+	public MainController(Trainer trainer) {
+		this.trainer = trainer;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		trainer = createTrainer();
-
 		initTrainer();
-		initDevicesList();
 		initNotesRange();
 		initPicker();
 		initInversions();
 		initTonics();
+
+		settingsButton.setOnAction(event -> {
+			App.setScreen(ScreenManager.Screen.SETTINGS);
+		});
 	}
 
 	private void initTonics() {
@@ -109,21 +117,6 @@ public class MainController implements Initializable {
 		}
 	}
 
-	private void initDevicesList() {
-		FXMLLoader loader = new FXMLLoader(Resources.layout.DEVICES.url());
-		loader.setResources(Resources.getBundle());
-
-		DeviceListController controller = new DeviceListController(trainer);
-		loader.setController(controller);
-		loader.setRoot(devicesRoot);
-
-		try {
-			loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private void initPicker() {
 		FXMLLoader loader = new FXMLLoader(Resources.layout.PICKER.url());
 		loader.setResources(Resources.getBundle());
@@ -137,22 +130,6 @@ public class MainController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private Trainer createTrainer() {
-		List<Chord> chords = new ArrayList<>();
-
-		try {
-			chords = ChordReader.readChords(Resources.value.CHORDS.url());
-		} catch (IOException e) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setHeaderText(Resources.strings.error_chord_reader);
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
-		}
-
-		ChordPicker suggester = new ChordPicker(chords);
-		return new Trainer(suggester);
 	}
 
 	public void close() {
