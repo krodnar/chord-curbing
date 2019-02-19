@@ -5,18 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
 
-<fx:root columnHalignment="CENTER" hgap="4.0" type="FlowPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" columnHalignment="CENTER" hgap="16.0" type="FlowPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="%settings.device" />
-      <ChoiceBox fx:id="devicesList">
-         <FlowPane.margin>
-            <Insets right="16.0" />
-         </FlowPane.margin></ChoiceBox>
       <Label text="%settings.start_octave" />
       <ChoiceBox fx:id="startOctaveChoice">
          <FlowPane.margin>
-            <Insets right="16.0" />
-         </FlowPane.margin></ChoiceBox>
+            <Insets />
+         </FlowPane.margin>
+      </ChoiceBox>
       <Label text="%settings.end_octave" />
       <ChoiceBox fx:id="endOctaveChoice" />
    </children>

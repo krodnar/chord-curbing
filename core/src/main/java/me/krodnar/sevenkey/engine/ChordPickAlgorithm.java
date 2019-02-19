@@ -2,11 +2,11 @@ package me.krodnar.sevenkey.engine;
 
 import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Octave;
+import me.krodnar.sevenkey.models.NoteTonic;
 
 import java.util.List;
 
-public interface ChordPickStrategy {
+public interface ChordPickAlgorithm {
 
 	ConcreteChord getChord();
 
@@ -14,9 +14,5 @@ public interface ChordPickStrategy {
 
 	void setInversionsPool(List<Integer> inversionsPool);
 
-	void setOctaveRange(Octave startOctave, Octave endOctave);
-
-	void setStartOctave(Octave octave);
-
-	void setEndOctave(Octave octave);
+	void setNoteTonicsPool(List<NoteTonic> noteTonicsPool);
 }

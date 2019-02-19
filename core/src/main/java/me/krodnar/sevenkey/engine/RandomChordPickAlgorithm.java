@@ -1,27 +1,28 @@
 package me.krodnar.sevenkey.engine;
 
-import me.krodnar.sevenkey.models.Chord;
-import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Note;
-import me.krodnar.sevenkey.models.Octave;
+import me.krodnar.sevenkey.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.TreeSet;
 
-public class RandomChordPickStrategy implements ChordPickStrategy {
+public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 
 	private static final Random RANDOM = new Random();
 
+	private ChordPicker picker;
+
 	private List<Chord> chordsPool;
 	private List<Integer> inversionsPool;
-
-	private Octave startOctave = Octave.CM;
-	private Octave endOctave = Octave.C9;
+	private List<NoteTonic> noteTonicsPool;
 
 	private int pickedInversion;
 	private ArrayList<Integer> availableInversions;
+
+	public RandomChordPickAlgorithm(ChordPicker picker) {
+		this.picker = picker;
+	}
 
 	@Override
 	public ConcreteChord getChord() throws IllegalStateException {
@@ -32,6 +33,10 @@ public class RandomChordPickStrategy implements ChordPickStrategy {
 
 		if (inversionsPool == null || inversionsPool.isEmpty()) {
 			throw new IllegalStateException("No inversions in pool.");
+		}
+
+		if (noteTonicsPool == null || noteTonicsPool.isEmpty()) {
+			throw new IllegalStateException("No tonics in pool.");
 		}
 
 		availableInversions = new ArrayList<>(inversionsPool);
@@ -55,11 +60,16 @@ public class RandomChordPickStrategy implements ChordPickStrategy {
 	private List<ConcreteChord> getPossibleConcreteChords(Chord chord) {
 		List<ConcreteChord> possibleConcreteChords = new ArrayList<>();
 
-		int startNoteIndex = startOctave.getStartIndex();
-		int endNoteIndex = endOctave.getEndIndex();
+		int startNoteIndex = picker.getStartOctave().getStartIndex();
+		int endNoteIndex = picker.getEndOctave().getEndIndex();
 
 		for (int i = startNoteIndex; i < endNoteIndex; i++) {
 			Note note = Note.getByIndex(i);
+
+			if (!noteTonicsPool.contains(note.getTonic())) {
+				continue;
+			}
+
 			TreeSet<Integer> notesIndex = chord.getNotesIndex(note);
 			if (notesIndex.first() > startNoteIndex && notesIndex.last() < endNoteIndex) {
 				possibleConcreteChords.add(new ConcreteChord(chord, note));
@@ -105,18 +115,7 @@ public class RandomChordPickStrategy implements ChordPickStrategy {
 	}
 
 	@Override
-	public void setStartOctave(Octave octave) {
-		startOctave = octave;
-	}
-
-	@Override
-	public void setEndOctave(Octave octave) {
-		endOctave = octave;
-	}
-
-	@Override
-	public void setOctaveRange(Octave startOctave, Octave endOctave) {
-		this.startOctave = startOctave;
-		this.endOctave = endOctave;
+	public void setNoteTonicsPool(List<NoteTonic> noteTonicsPool) {
+		this.noteTonicsPool = noteTonicsPool;
 	}
 }

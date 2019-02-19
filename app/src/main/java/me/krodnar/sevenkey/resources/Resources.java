@@ -1,7 +1,5 @@
 package me.krodnar.sevenkey.resources;
 
-import javafx.scene.text.Font;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,10 +11,12 @@ public final class Resources {
 
 	public static final class layout {
 		public static ResourceDescriptor MAIN = new ResourceDescriptor("/fxml/main.fxml");
-		public static ResourceDescriptor SETTINGS = new ResourceDescriptor("/fxml/settings.fxml");
+		public static ResourceDescriptor DEVICES = new ResourceDescriptor("/fxml/devices.fxml");
 		public static ResourceDescriptor PICKER = new ResourceDescriptor("/fxml/picker.fxml");
 		public static ResourceDescriptor TRAINER = new ResourceDescriptor("/fxml/trainer.fxml");
 		public static ResourceDescriptor INVERSIONS = new ResourceDescriptor("/fxml/inversions.fxml");
+		public static ResourceDescriptor NOTES = new ResourceDescriptor("/fxml/range.fxml");
+		public static ResourceDescriptor TONICS = new ResourceDescriptor("/fxml/tonics.fxml");
 
 		public static ResourceDescriptor ITEM_INVERSION = new ResourceDescriptor("/fxml/item_inversion.fxml");
 		public static ResourceDescriptor ITEM_CHORDS_TOGGLE= new ResourceDescriptor("/fxml/item_chords_toggle.fxml");
