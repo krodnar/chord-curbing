@@ -39,8 +39,13 @@ public class DeviceListController implements Initializable {
 
 		devicesList.valueProperty().addListener((observableValue, oldInfo, newInfo) -> {
 			try {
+				if (oldInfo != null) {
+					MidiDevice device = MidiSystem.getMidiDevice(newInfo);
+					trainer.removeInput(device);
+				}
+
 				MidiDevice device = MidiSystem.getMidiDevice(newInfo);
-				trainer.setDevice(device);
+				trainer.addInput(device);
 			} catch (MidiUnavailableException e) {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText(Resources.strings.error_connecting_device);

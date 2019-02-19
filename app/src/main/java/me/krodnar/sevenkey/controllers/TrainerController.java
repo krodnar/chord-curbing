@@ -54,16 +54,6 @@ public class TrainerController implements Initializable {
 	private class DefaultListener implements TrainerListener {
 
 		@Override
-		public void onStart() {
-			Platform.runLater(() -> nextChord());
-		}
-
-		@Override
-		public void onStop() {
-
-		}
-
-		@Override
 		public void onCorrectChord(ConcreteChord chord) {
 			Platform.runLater(() -> nextChord());
 		}
