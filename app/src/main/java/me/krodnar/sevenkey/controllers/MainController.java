@@ -6,9 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.main.App;
 import me.krodnar.sevenkey.main.ScreenManager;
+import me.krodnar.sevenkey.model.MainModel;
 import me.krodnar.sevenkey.resources.Resources;
 import me.krodnar.sevenkey.utils.FxmlUtils;
 
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-	private Trainer trainer;
+	private MainModel mainModel;
 
 	@FXML
 	private HBox pickerRoot;
@@ -33,8 +33,8 @@ public class MainController implements Initializable {
 	@FXML
 	private HBox tonicsRoot;
 
-	public MainController(Trainer trainer) {
-		this.trainer = trainer;
+	public MainController(MainModel mainModel) {
+		this.mainModel = mainModel;
 	}
 
 	@Override
@@ -43,23 +43,23 @@ public class MainController implements Initializable {
 			FxmlUtils.multiRootLoad()
 					 .add(
 							 Resources.layout.PICKER.url(),
-							 new PickerController(trainer.getPicker()),
+							 new PickerController(mainModel.getChordPicker()),
 							 pickerRoot)
 					 .add(
 							 Resources.layout.INVERSIONS.url(),
-							 new InversionsController(trainer.getPicker()),
+							 new InversionsController(mainModel.getChordPicker()),
 							 inversionsRoot)
 					 .add(
 							 Resources.layout.TRAINER.url(),
-							 new TrainerController(trainer),
+							 new TrainerController(mainModel.getTrainer()),
 							 trainerRoot)
 					 .add(
 							 Resources.layout.RANGE.url(),
-							 new RangeController(trainer.getPicker()),
+							 new RangeController(mainModel.getChordPicker()),
 							 octavesRangeRoot)
 					 .add(
 							 Resources.layout.TONICS.url(),
-							 new NoteTonicsController(trainer.getPicker()),
+							 new NoteTonicsController(mainModel.getChordPicker()),
 							 tonicsRoot)
 					 .load();
 		} catch (IOException e) {
@@ -72,6 +72,6 @@ public class MainController implements Initializable {
 	}
 
 	public void close() {
-		trainer.stop();
+		mainModel.getTrainer().stop();
 	}
 }

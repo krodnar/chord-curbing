@@ -11,9 +11,11 @@ import me.krodnar.sevenkey.controllers.MainController;
 import me.krodnar.sevenkey.controllers.SettingsController;
 import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.engine.ChordPicker;
+import me.krodnar.sevenkey.model.MainModel;
 import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.resources.Resources;
 import me.krodnar.sevenkey.tools.ChordReader;
+import me.krodnar.sevenkey.utils.FxmlUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,38 +23,31 @@ import java.util.List;
 
 public class App extends Application {
 
-	private Trainer trainer;
+	private MainModel mainModel = new MainModel();
 	private static ScreenManager screenManager;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		trainer = createTrainer();
-
+		// enables font smoothing
 		System.setProperty("prism.lcdtext", "false");
 		System.setProperty("prism.text", "t2k");
 
-		FXMLLoader trLoader = new FXMLLoader(Resources.layout.MAIN.url());
-		MainController mainController = new MainController(trainer);
-		trLoader.setController(mainController);
-		Parent root = trLoader.load();
+		MainController mainController = new MainController(mainModel);
+		Parent main = FxmlUtils.load(Resources.layout.MAIN.url(), mainController);
+		Scene mainScene = new Scene(main);
 
-		Scene trainerScene = new Scene(root);
-
-		FXMLLoader prefLoader = new FXMLLoader(Resources.layout.SETTINGS.url());
-		SettingsController settingsController = new SettingsController(trainer);
-		prefLoader.setController(settingsController);
-		Parent prefs = prefLoader.load();
-
-		Scene settingsScene = new Scene(prefs);
+		SettingsController settingsController = new SettingsController(mainModel);
+		Parent settings = FxmlUtils.load(Resources.layout.SETTINGS.url(), settingsController);
+		Scene settingsScene = new Scene(settings);
 
 		screenManager = new ScreenManager(primaryStage);
 		screenManager
 				.addScreen(settingsScene, ScreenManager.Screen.SETTINGS)
-				.addScreen(trainerScene, ScreenManager.Screen.TRAINER);
+				.addScreen(mainScene, ScreenManager.Screen.TRAINER);
 
 		primaryStage.setTitle(Resources.strings.app_name);
 		primaryStage.getIcons().add(new Image(Resources.drawable.FAVICON.stream()));
-		primaryStage.setScene(trainerScene);
+		primaryStage.setScene(mainScene);
 		primaryStage.setOnCloseRequest(windowEvent -> mainController.close());
 		primaryStage.show();
 	}
@@ -63,21 +58,5 @@ public class App extends Application {
 
 	public static void setScreen(ScreenManager.Screen screen) {
 		screenManager.setScreen(screen);
-	}
-
-	private Trainer createTrainer() {
-		List<Chord> chords = new ArrayList<>();
-
-		try {
-			chords = ChordReader.readChords(Resources.value.CHORDS.url());
-		} catch (IOException e) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setHeaderText(Resources.strings.error_chord_reader);
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
-		}
-
-		ChordPicker suggester = new ChordPicker(chords);
-		return new Trainer(suggester);
 	}
 }

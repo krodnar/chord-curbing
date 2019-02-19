@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
-import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.main.App;
 import me.krodnar.sevenkey.main.ScreenManager;
+import me.krodnar.sevenkey.model.MainModel;
 import me.krodnar.sevenkey.resources.Resources;
 import me.krodnar.sevenkey.utils.FxmlUtils;
 
@@ -16,15 +16,15 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
 
-	private Trainer trainer;
+	private MainModel mainModel;
 
 	@FXML
 	private FlowPane devicesRoot;
 	@FXML
 	private Button saveButton;
 
-	public SettingsController(Trainer trainer) {
-		this.trainer = trainer;
+	public SettingsController(MainModel mainModel) {
+		this.mainModel = mainModel;
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class SettingsController implements Initializable {
 	}
 
 	private void initDevicesList() {
-		DeviceListController controller = new DeviceListController(trainer);
+		DeviceListController controller = new DeviceListController(mainModel.getTrainer());
 
 		try {
 			FxmlUtils.rootLoad(Resources.layout.DEVICES.url(), controller, devicesRoot);
