@@ -14,7 +14,7 @@
          </font></Label>
       <Label fx:id="notesLabel" text="Chord notes" />
       <Label fx:id="pressedNotesLabel" text="Pressed notes" />
-      <Button fx:id="nextChordButton" mnemonicParsing="false" text="%trainer.next_chord">
+      <Button fx:id="nextChordButton" mnemonicParsing="false" text="%mainModel.next_chord">
          <font>
             <Font name="Segoe UI Semilight" size="14.0" />
          </font></Button>
