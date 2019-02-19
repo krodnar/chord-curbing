@@ -1,25 +1,18 @@
 package me.krodnar.sevenkey.main;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import me.krodnar.sevenkey.controllers.MainController;
 import me.krodnar.sevenkey.controllers.SettingsController;
-import me.krodnar.sevenkey.core.Trainer;
-import me.krodnar.sevenkey.engine.ChordPicker;
 import me.krodnar.sevenkey.model.MainModel;
-import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.resources.Resources;
-import me.krodnar.sevenkey.tools.ChordReader;
 import me.krodnar.sevenkey.utils.FxmlUtils;
+import me.krodnar.sevenkey.utils.ScreenManager;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class App extends Application {
 

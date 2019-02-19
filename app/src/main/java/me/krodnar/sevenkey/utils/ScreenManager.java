@@ -1,4 +1,4 @@
-package me.krodnar.sevenkey.main;
+package me.krodnar.sevenkey.utils;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;

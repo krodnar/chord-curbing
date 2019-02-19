@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import me.krodnar.sevenkey.main.App;
-import me.krodnar.sevenkey.main.ScreenManager;
+import me.krodnar.sevenkey.utils.ScreenManager;
 import me.krodnar.sevenkey.model.MainModel;
 import me.krodnar.sevenkey.resources.Resources;
 import me.krodnar.sevenkey.utils.FxmlUtils;
