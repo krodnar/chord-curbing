@@ -1,7 +1,6 @@
 package me.krodnar.sevenkey.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
@@ -9,6 +8,7 @@ import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.main.App;
 import me.krodnar.sevenkey.main.ScreenManager;
 import me.krodnar.sevenkey.resources.Resources;
+import me.krodnar.sevenkey.utils.FxmlUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,15 +35,10 @@ public class SettingsController implements Initializable {
 	}
 
 	private void initDevicesList() {
-		FXMLLoader loader = new FXMLLoader(Resources.layout.DEVICES.url());
-		loader.setResources(Resources.getBundle());
-
 		DeviceListController controller = new DeviceListController(trainer);
-		loader.setController(controller);
-		loader.setRoot(devicesRoot);
 
 		try {
-			loader.load();
+			FxmlUtils.rootLoad(Resources.layout.DEVICES.url(), controller, devicesRoot);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
