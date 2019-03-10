@@ -44,10 +44,10 @@ public class Chord {
 		return inverted;
 	}
 
-	public TreeSet<Integer> getNotesIndex(Note note) {
+	public TreeSet<Integer> getKeysIndex(Key key) {
 		TreeSet<Integer> indices = new TreeSet<>();
 
-		int index = note.getIndex();
+		int index = key.getIndex();
 		for (int i = 0; i < steps.size(); i++) {
 			index += steps.get(i);
 			indices.add(i < inversion ? index + 12 : index);

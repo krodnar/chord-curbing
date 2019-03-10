@@ -1,7 +1,7 @@
 package me.krodnar.sevenkey.core;
 
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Note;
+import me.krodnar.sevenkey.models.Key;
 
 import javax.sound.midi.ShortMessage;
 import java.util.Set;
@@ -10,16 +10,16 @@ public interface TrainerListener {
 
 	void onCorrectChord(ConcreteChord chord);
 
-	void onWrongChord(ConcreteChord chord, Set<Note> pressedNotes);
+	void onWrongChord(ConcreteChord chord, Set<Key> pressedKeys);
 
 	void onNextChord(ConcreteChord chord);
 
-	void onNoteOn(Note pressed, Set<Note> allNotes);
+	void onNoteOn(Key pressed, Set<Key> allKeys);
 
-	void onNoteOff(Note released, Set<Note> allNotes);
+	void onNoteOff(Key released, Set<Key> allKeys);
 
-	default void onNoteCommand(Note note, int command, Set<Note> pressedNotes) {
-		if (command == ShortMessage.NOTE_ON) onNoteOn(note, pressedNotes);
-		else if (command == ShortMessage.NOTE_OFF) onNoteOff(note, pressedNotes);
+	default void onNoteCommand(Key key, int command, Set<Key> pressedKeys) {
+		if (command == ShortMessage.NOTE_ON) onNoteOn(key, pressedKeys);
+		else if (command == ShortMessage.NOTE_OFF) onNoteOff(key, pressedKeys);
 	}
 }

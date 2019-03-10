@@ -60,19 +60,19 @@ public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 	private List<ConcreteChord> getPossibleConcreteChords(Chord chord) {
 		List<ConcreteChord> possibleConcreteChords = new ArrayList<>();
 
-		int startNoteIndex = picker.getStartOctave().getStartIndex();
-		int endNoteIndex = picker.getEndOctave().getEndIndex();
+		int startKeyIndex = picker.getStartOctave().getStartIndex();
+		int endKeyIndex = picker.getEndOctave().getEndIndex();
 
-		for (int i = startNoteIndex; i < endNoteIndex; i++) {
-			Note note = Note.getByIndex(i);
+		for (int i = startKeyIndex; i < endKeyIndex; i++) {
+			Key key = Key.getByIndex(i);
 
-			if (!noteTonicsPool.contains(note.getTonic())) {
+			if (!noteTonicsPool.contains(key.getTonic())) {
 				continue;
 			}
 
-			TreeSet<Integer> notesIndex = chord.getNotesIndex(note);
-			if (notesIndex.first() > startNoteIndex && notesIndex.last() < endNoteIndex) {
-				possibleConcreteChords.add(new ConcreteChord(chord, note));
+			TreeSet<Integer> keysIndex = chord.getKeysIndex(key);
+			if (keysIndex.first() > startKeyIndex && keysIndex.last() < endKeyIndex) {
+				possibleConcreteChords.add(new ConcreteChord(chord, key));
 			}
 		}
 

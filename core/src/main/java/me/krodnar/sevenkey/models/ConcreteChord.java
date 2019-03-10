@@ -5,34 +5,34 @@ import java.util.TreeSet;
 
 public class ConcreteChord {
 
-	private Note note;
+	private Key key;
 	private Chord chord;
-	private TreeSet<Note> notes = new TreeSet<>();
+	private TreeSet<Key> keys = new TreeSet<>();
 
-	public ConcreteChord(Chord chord, Note note) {
-		this.note = note;
+	public ConcreteChord(Chord chord, Key key) {
+		this.key = key;
 		this.chord = chord;
 
-		TreeSet<Integer> notesIndex = chord.getNotesIndex(note);
-		for (Integer index : notesIndex) {
-			notes.add(Note.getByIndex(index));
+		TreeSet<Integer> keysIndex = chord.getKeysIndex(key);
+		for (Integer index : keysIndex) {
+			keys.add(Key.getByIndex(index));
 		}
 	}
 
-	public Note getNote() {
-		return note;
+	public Key getKey() {
+		return key;
 	}
 
 	public Chord getChord() {
 		return chord;
 	}
 
-	public Set<Note> getNotes() {
-		return notes;
+	public Set<Key> getKeys() {
+		return keys;
 	}
 
 	public String getNotation() {
-		String notation = note + " " + chord.getNaming();
+		String notation = key + " " + chord.getNaming();
 		if (chord.isInverted()) {
 			notation += " (" + chord.getInversion() + " inversion)";
 		}

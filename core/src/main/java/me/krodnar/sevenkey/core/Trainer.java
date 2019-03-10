@@ -3,7 +3,7 @@ package me.krodnar.sevenkey.core;
 import me.krodnar.sevenkey.engine.ChordChecker;
 import me.krodnar.sevenkey.engine.ChordPicker;
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Note;
+import me.krodnar.sevenkey.models.Key;
 import me.krodnar.sevenkey.tools.MidiDevicesManager;
 
 import javax.sound.midi.*;
@@ -84,16 +84,16 @@ public class Trainer {
 		public void send(MidiMessage midiMessage, long timeStamp) {
 			if (midiMessage instanceof ShortMessage) {
 				ShortMessage message = (ShortMessage) midiMessage;
-				Note note = Note.getByIndex(message.getData1());
+				Key key = Key.getByIndex(message.getData1());
 
 				int command = message.getCommand();
-				checker.noteCommand(note, command);
-				if (listener != null) listener.onNoteCommand(note, command, checker.getPressedNotes());
+				checker.noteCommand(key, command);
+				if (listener != null) listener.onNoteCommand(key, command, checker.getPressedKeys());
 
 				if (checker.check()) {
 					if (listener != null) listener.onCorrectChord(checker.getChord());
 				} else {
-					if (listener != null) listener.onWrongChord(checker.getChord(), checker.getPressedNotes());
+					if (listener != null) listener.onWrongChord(checker.getChord(), checker.getPressedKeys());
 				}
 			}
 		}

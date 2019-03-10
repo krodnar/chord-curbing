@@ -2,9 +2,9 @@ package me.krodnar.sevenkey.models;
 
 import java.util.Random;
 
-public enum Note {
+public enum Key {
 
-	//region notes
+	//region keys
 	C1M(0, "C", Octave.CM),
 	CS1M(1, "C#", Octave.CM),
 	D1M(2, "D", Octave.CM),
@@ -155,17 +155,17 @@ public enum Note {
 
 	private static final Random RANDOM = new Random();
 
-	Note(int index, String notation, Octave octave) {
+	Key(int index, String notation, Octave octave) {
 		this.index = index;
 		this.notation = notation;
 		this.octave = octave;
 	}
 
-	public static Note getRandom() {
+	public static Key getRandom() {
 		return values()[RANDOM.nextInt(values().length)];
 	}
 
-	public static Note getRandomInRange(int minIndex, int maxIndex) {
+	public static Key getRandomInRange(int minIndex, int maxIndex) {
 		if (minIndex < 0 || maxIndex > 132) {
 			throw new IllegalArgumentException("Indexes should be in proper range.");
 		}
@@ -173,17 +173,17 @@ public enum Note {
 		return values()[RANDOM.nextInt(maxIndex - minIndex + 1) + minIndex];
 	}
 
-	public static Note getRandomInRange(Octave octave) {
+	public static Key getRandomInRange(Octave octave) {
 		return getRandomInRange(octave.getStartIndex(), octave.getEndIndex());
 	}
 
-	public static Note getRandomInRange(Octave minOctave, Octave maxOctave) {
+	public static Key getRandomInRange(Octave minOctave, Octave maxOctave) {
 		return minOctave == maxOctave ?
 				getRandomInRange(minOctave) :
 				getRandomInRange(minOctave.getStartIndex(), maxOctave.getEndIndex());
 	}
 
-	public static Note getByIndex(int index) {
+	public static Key getByIndex(int index) {
 		return values()[index];
 	}
 
