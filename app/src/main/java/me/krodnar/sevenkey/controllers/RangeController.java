@@ -3,12 +3,8 @@ package me.krodnar.sevenkey.controllers;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.HBox;
-import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.engine.ChordPicker;
-import me.krodnar.sevenkey.models.NoteTonic;
 import me.krodnar.sevenkey.models.Octave;
 
 import java.net.URL;

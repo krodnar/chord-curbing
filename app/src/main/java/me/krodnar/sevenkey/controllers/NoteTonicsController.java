@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
 import me.krodnar.sevenkey.engine.ChordPicker;
-import me.krodnar.sevenkey.models.NoteTonic;
+import me.krodnar.sevenkey.models.Note;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,12 +27,12 @@ public class NoteTonicsController implements Initializable {
 	}
 
 	private void initNotePositions() {
-		for (NoteTonic position : NoteTonic.values()) {
+		for (Note position : Note.values()) {
 			CheckBox checkBox = new CheckBox(position.getNotation());
 			checkBox.selectedProperty().set(true);
 			checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-				if (newValue) picker.includeNoteTonic(position);
-				else picker.excludeNoteTonic(position);
+				if (newValue) picker.includeNote(position);
+				else picker.excludeNote(position);
 			});
 
 			noteTonicsRoot.getChildren().add(checkBox);

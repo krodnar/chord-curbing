@@ -2,7 +2,7 @@ package me.krodnar.sevenkey.engine;
 
 import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.NoteTonic;
+import me.krodnar.sevenkey.models.Note;
 import me.krodnar.sevenkey.models.Octave;
 
 import java.util.*;
@@ -20,14 +20,14 @@ public class ChordPicker {
 
 	private Map<Chord, Boolean> chordsPool = new HashMap<>();
 	private List<Integer> inversionsPool = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
-	private Map<NoteTonic, Boolean> noteTonicsPool = new HashMap<>();
+	private Map<Note, Boolean> notesPool = new HashMap<>();
 
 	public ChordPicker(List<Chord> chords) {
 		this.chords = chords;
 		processChords(chords);
 
-		for (NoteTonic tonic : NoteTonic.values()) {
-			noteTonicsPool.put(tonic, true);
+		for (Note note : Note.values()) {
+			notesPool.put(note, true);
 		}
 	}
 
@@ -37,14 +37,14 @@ public class ChordPicker {
 			if (value) chords.add(key);
 		});
 
-		List<NoteTonic> noteTonics = new ArrayList<>();
-		noteTonicsPool.forEach((key, value) -> {
-			if (value) noteTonics.add(key);
+		List<Note> notes = new ArrayList<>();
+		notesPool.forEach((key, value) -> {
+			if (value) notes.add(key);
 		});
 
 		algorithm.setChordsPool(chords);
 		algorithm.setInversionsPool(inversionsPool);
-		algorithm.setNoteTonicsPool(noteTonics);
+		algorithm.setNotesPool(notes);
 		return algorithm.getChord();
 	}
 
@@ -78,12 +78,12 @@ public class ChordPicker {
 		inversionsPool.remove(((Integer) inversion));
 	}
 
-	public void includeNoteTonic(NoteTonic tonic) {
-		noteTonicsPool.put(tonic, true);
+	public void includeNote(Note note) {
+		notesPool.put(note, true);
 	}
 
-	public void excludeNoteTonic(NoteTonic tonic) {
-		noteTonicsPool.put(tonic, false);
+	public void excludeNote(Note note) {
+		notesPool.put(note, false);
 	}
 
 	public void setStartOctave(Octave startOctave) {
