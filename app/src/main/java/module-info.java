@@ -13,4 +13,8 @@ module sevenkey.app {
 	opens me.krodnar.sevenkey.controllers to
 			javafx.fxml,
 			javafx.graphics;
+
+	opens me.krodnar.sevenkey.views to
+			javafx.fxml,
+			javafx.graphics;
 }

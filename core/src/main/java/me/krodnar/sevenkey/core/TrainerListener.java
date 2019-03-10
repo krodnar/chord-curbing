@@ -8,10 +8,6 @@ import java.util.Set;
 
 public interface TrainerListener {
 
-	void onStart();
-
-	void onStop();
-
 	void onCorrectChord(ConcreteChord chord);
 
 	void onWrongChord(ConcreteChord chord, Set<Note> pressedNotes);

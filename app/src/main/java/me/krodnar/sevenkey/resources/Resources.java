@@ -11,7 +11,6 @@ public final class Resources {
 
 	public static final class layout {
 		public static ResourceDescriptor MAIN = new ResourceDescriptor("/fxml/main.fxml");
-		public static ResourceDescriptor DEVICES = new ResourceDescriptor("/fxml/devices.fxml");
 		public static ResourceDescriptor PICKER = new ResourceDescriptor("/fxml/picker.fxml");
 		public static ResourceDescriptor TRAINER = new ResourceDescriptor("/fxml/trainer.fxml");
 		public static ResourceDescriptor INVERSIONS = new ResourceDescriptor("/fxml/inversions.fxml");
@@ -36,6 +35,9 @@ public final class Resources {
 		public static String app_name = bundle.getString("app.name");
 
 		public static String root_note = bundle.getString("root_note");
+
+		public static String settings_input = bundle.getString("settings.input");
+		public static String settings_output = bundle.getString("settings.output");
 
 		public static String error_default_header = bundle.getString("error.header_default");
 		public static String error_chord_picker = bundle.getString("error.chord_picker");

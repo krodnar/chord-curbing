@@ -5,7 +5,7 @@ ext {
 }
 
 group 'me.krodnar'
-version '0.5.0'
+version '0.5.1'
 
 wrapper{
     gradleVersion = '5.2'

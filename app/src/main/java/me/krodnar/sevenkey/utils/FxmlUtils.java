@@ -25,6 +25,12 @@ public class FxmlUtils {
 		return loader.load();
 	}
 
+	public static <R> R load(URL layout) throws IOException {
+		FXMLLoader loader = new FXMLLoader(layout);
+		loader.setResources(Resources.getBundle());
+		return loader.load();
+	}
+
 	public static MultiRootLoadBuilder multiRootLoad() {
 		return new MultiRootLoadBuilder();
 	}

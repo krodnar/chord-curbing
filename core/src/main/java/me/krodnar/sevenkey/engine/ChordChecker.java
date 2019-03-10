@@ -33,7 +33,7 @@ public class ChordChecker {
 	}
 
 	public boolean isCorrectChord() {
-		return chord.getNotes().equals(pressedNotes);
+		return chord != null && chord.getNotes().equals(pressedNotes);
 	}
 
 	public ConcreteChord getChord() {

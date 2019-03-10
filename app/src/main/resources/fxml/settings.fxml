@@ -2,15 +2,33 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox minHeight="600.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1280.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <padding>
-      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
-   </padding>
+<TilePane minHeight="600.0" minWidth="1000.0" prefColumns="2" prefHeight="800.0" prefRows="1" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <FlowPane fx:id="devicesRoot" />
-      <Button fx:id="saveButton" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" text="Save" />
+      <VBox spacing="8.0">
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+         <children>
+            <Label text="%settings.input">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </Label>
+            <ListView fx:id="devicesInRoot" focusTraversable="false" prefHeight="200.0" prefWidth="400.0" />
+            <Label text="%settings.output">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </Label>
+            <ListView fx:id="devicesOutRoot" focusTraversable="false" prefHeight="200.0" prefWidth="400.0" />
+            <Button fx:id="saveButton" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" text="%settings.save" />
+         </children>
+      </VBox>
    </children>
-</VBox>
+</TilePane>
