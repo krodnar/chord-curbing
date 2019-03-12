@@ -5,22 +5,37 @@ import java.util.TreeSet;
 
 public class ConcreteChord {
 
-	private Key key;
+	private Key rootKey;
 	private Chord chord;
+	private Note note;
 	private TreeSet<Key> keys = new TreeSet<>();
 
-	public ConcreteChord(Chord chord, Key key) {
-		this.key = key;
+	private ConcreteChord(Chord chord, Key rootKey) {
+		this.rootKey = rootKey;
 		this.chord = chord;
 
-		TreeSet<Integer> keysIndex = chord.getKeysIndex(key);
+		TreeSet<Integer> keysIndex = chord.getKeysIndex(rootKey);
 		for (Integer index : keysIndex) {
 			keys.add(Key.getByIndex(index));
 		}
 	}
 
-	public Key getKey() {
-		return key;
+	private ConcreteChord(Chord chord, Note note, Octave octave) {
+		this(chord, Key.of(note, octave));
+		this.note = note;
+	}
+
+	public static ConcreteChord of(Chord chord, Key rootKey) {
+		return new ConcreteChord(chord, rootKey);
+	}
+
+	public static ConcreteChord of(Chord chord, Note note, Octave octave) {
+		Key key = Key.of(note, octave);
+		return new ConcreteChord(chord, note, octave);
+	}
+
+	public Key getRootKey() {
+		return rootKey;
 	}
 
 	public Chord getChord() {
@@ -32,7 +47,13 @@ public class ConcreteChord {
 	}
 
 	public String getNotation() {
-		String notation = key + " " + chord.getNaming();
+		String notation;
+		if (note == null) {
+			notation = rootKey + " " + chord.getNaming();
+		} else {
+			notation = note.getNotation() + rootKey.getOctave().getIndex() + " " + chord.getNaming();
+		}
+
 		if (chord.isInverted()) {
 			notation += " (" + chord.getInversion() + " inversion)";
 		}

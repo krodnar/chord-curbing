@@ -2,7 +2,7 @@ package me.krodnar.sevenkey.engine;
 
 import me.krodnar.sevenkey.models.Chord;
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.NoteTonic;
+import me.krodnar.sevenkey.models.Note;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface ChordPickAlgorithm {
 
 	void setInversionsPool(List<Integer> inversionsPool);
 
-	void setNoteTonicsPool(List<NoteTonic> noteTonicsPool);
+	void setNotesPool(List<Note> notesPool);
 }
