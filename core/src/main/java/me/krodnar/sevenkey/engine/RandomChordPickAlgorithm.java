@@ -49,7 +49,7 @@ public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 			}
 
 			Chord chord = possibleChords.remove(RANDOM.nextInt(possibleChords.size()));
-			chord.inverse(pickedInversion);
+			chord = chord.inverse(pickedInversion);
 
 			possibleConcreteChords = getPossibleConcreteChords(chord);
 		} while (possibleConcreteChords.isEmpty());
