@@ -30,7 +30,6 @@ public class ConcreteChord {
 	}
 
 	public static ConcreteChord of(Chord chord, Note note, Octave octave) {
-		Key key = Key.of(note, octave);
 		return new ConcreteChord(chord, note, octave);
 	}
 

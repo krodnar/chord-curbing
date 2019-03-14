@@ -23,6 +23,10 @@ public class Chord {
 		this.steps = chord.steps;
 	}
 
+	public static Chord of(ChordType type) {
+		return new Chord(type.getGroup().getName(), type.getName(), 0, type.getSteps());
+	}
+
 	public TreeSet<Integer> getKeysIndex(Key key) {
 		TreeSet<Integer> indices = new TreeSet<>();
 
