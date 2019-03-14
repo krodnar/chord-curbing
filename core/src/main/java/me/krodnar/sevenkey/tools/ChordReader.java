@@ -63,6 +63,6 @@ public class ChordReader {
 			}
 		}
 
-		return new Chord(type, naming, steps.stream().mapToInt(i -> i).toArray());
+		return new Chord(type, naming, 0, steps.stream().mapToInt(i -> i).toArray());
 	}
 }

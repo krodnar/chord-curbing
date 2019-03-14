@@ -12,16 +12,14 @@ public class Tonality {
 		MAJOR, MINOR
 	}
 
+	private String name;
 	private Chord[] chords;
 	private Mode mode;
 
-	private Tonality(Mode mode, Chord[] chords) {
+	public Tonality(String name, Mode mode, Chord[] chords) {
+		this.name = name;
 		this.mode = mode;
 		this.chords = chords;
-	}
-
-	public static Tonality of(Mode mode, Chord... chords) {
-		return new Tonality(mode, chords);
 	}
 
 	public static Tonality of(TonalityType type) {
@@ -32,14 +30,13 @@ public class Tonality {
 			chords[i] = Chord.of(chordTypes[i]);
 		}
 
-		return new Tonality(type.getMode(), chords);
+		return new Tonality(type.getName(), type.getMode(), chords);
 	}
 
 	public ConcreteChord getChord(int degree, Note note, Octave octave) {
 		Chord chord = chords[degree];
 		Key[] keys = getKeys(note, octave);
-		Key key = keys[degree];
-		return ConcreteChord.of(chord, key);
+		return new TonalityChord(this, chord, degree, note, octave);
 	}
 
 	public Key[] getKeys(Note rootNote, Octave octave) {
@@ -62,5 +59,14 @@ public class Tonality {
 
 	public Chord[] getChords() {
 		return chords;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

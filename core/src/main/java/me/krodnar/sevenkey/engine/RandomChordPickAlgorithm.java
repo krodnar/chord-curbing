@@ -72,7 +72,7 @@ public class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 
 			TreeSet<Integer> keysIndex = chord.getKeysIndex(key);
 			if (keysIndex.first() > startKeyIndex && keysIndex.last() < endKeyIndex) {
-				possibleConcreteChords.add(ConcreteChord.of(chord, key));
+				possibleConcreteChords.add(new ConcreteChord(chord, key));
 			}
 		}
 
