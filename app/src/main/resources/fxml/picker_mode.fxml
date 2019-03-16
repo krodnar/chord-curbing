@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="16.0" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <RadioButton fx:id="chordsRadio" mnemonicParsing="false" text="Chords">
+         <toggleGroup>
+            <ToggleGroup fx:id="mode" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tonalitiesRadio" mnemonicParsing="false" text="Tonalities" toggleGroup="$mode" />
+   </children>
+</fx:root>

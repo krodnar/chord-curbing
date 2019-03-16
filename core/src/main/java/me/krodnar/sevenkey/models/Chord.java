@@ -1,5 +1,6 @@
 package me.krodnar.sevenkey.models;
 
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class Chord {
@@ -27,10 +28,11 @@ public class Chord {
 		return new Chord(type.getGroup().getName(), type.getName(), 0, type.getSteps());
 	}
 
-	public TreeSet<Integer> getKeysIndex(Key key) {
-		TreeSet<Integer> indices = new TreeSet<>();
+	public SortedSet<Integer> getKeysIndex(Key key) {
+		SortedSet<Integer> indices = new TreeSet<>();
 
 		int index = key.getIndex();
+		indices.add(index);
 		for (int i = 0; i < steps.length; i++) {
 			index += steps[i];
 			indices.add(i < inversion ? index + 12 : index);

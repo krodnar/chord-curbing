@@ -12,7 +12,7 @@ public class ChordPicker {
 	}
 
 	private static final List<Integer> INVERSIONS = List.of(0, 1, 2, 3, 4, 5, 6);
-	private static final List<Integer> DEGREES = List.of(1, 2, 3, 4, 5, 6, 7);
+	private static final List<Integer> DEGREES = List.of(0, 1, 2, 3, 4, 5, 6);
 
 	private PickMode pickMode = PickMode.RANDOM;
 	private ChordPickAlgorithm algorithm = new RandomChordPickAlgorithm(this);
@@ -59,6 +59,10 @@ public class ChordPicker {
 	}
 
 	public void setPickMode(PickMode pickMode) {
+		if (this.pickMode == pickMode) {
+			return;
+		}
+
 		this.pickMode = pickMode;
 
 		switch (pickMode) {

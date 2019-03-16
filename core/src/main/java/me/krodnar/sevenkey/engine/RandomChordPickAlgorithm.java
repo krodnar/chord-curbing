@@ -1,11 +1,14 @@
 package me.krodnar.sevenkey.engine;
 
-import me.krodnar.sevenkey.models.*;
+import me.krodnar.sevenkey.models.Chord;
+import me.krodnar.sevenkey.models.ConcreteChord;
+import me.krodnar.sevenkey.models.Key;
+import me.krodnar.sevenkey.models.Note;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.TreeSet;
+import java.util.SortedSet;
 
 class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 
@@ -80,7 +83,7 @@ class RandomChordPickAlgorithm implements ChordPickAlgorithm {
 				continue;
 			}
 
-			TreeSet<Integer> keysIndex = chord.getKeysIndex(key);
+			SortedSet<Integer> keysIndex = chord.getKeysIndex(key);
 			if (keysIndex.first() > startKeyIndex && keysIndex.last() < endKeyIndex) {
 				possibleConcreteChords.add(new ConcreteChord(chord, key));
 			}

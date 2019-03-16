@@ -85,12 +85,15 @@ class TonalityChordPickAlgorithm implements ChordPickAlgorithm {
 		while (!octaves.isEmpty()) {
 			Octave octave = removeRandom(octaves);
 
-			ConcreteChord chord = tonality.getChord(degree, note, octave);
-			chord.inverse(inversion);
+			Chord chord = tonality.getChord(degree);
+			if (chord.getMaxInversion() < inversion) {
+				continue;
+			}
 
-			SortedSet<Key> keys = chord.getKeys();
-			if (keys.first().getIndex() >= minIndex && keys.last().getIndex() <= maxIndex) {
-				return chord;
+			chord = chord.inverse(inversion);
+			SortedSet<Integer> keys = chord.getKeysIndex(Key.of(note, octave));
+			if (keys.first() >= minIndex && keys.last() <= maxIndex) {
+				return TonalityChord.of(tonality, degree, note, octave, inversion);
 			}
 		}
 
