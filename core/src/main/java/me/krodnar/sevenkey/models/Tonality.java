@@ -1,6 +1,11 @@
 package me.krodnar.sevenkey.models;
 
+import static me.krodnar.sevenkey.models.Note.*;
+
 public class Tonality {
+
+	public static final Note[] MAJOR_NOTES = new Note[]{C, G, D, A, E, B, CB, FS, GB, DB, CS, AB, EB, BB, F};
+	public static final Note[] MINOR_NOTES = new Note[]{A, E, B, FS, CS, GS, AB, DS, EB, BB, AS, F, C, G, D};
 
 	private static final int[] MAJOR_STEPS = new int[]{2, 2, 1, 2, 2, 2, 1};
 	private static final int[] MINOR_STEPS = new int[]{2, 1, 2, 2, 1, 2, 2};
@@ -63,6 +68,10 @@ public class Tonality {
 
 	public String getName() {
 		return name;
+	}
+
+	public Mode getMode() {
+		return mode;
 	}
 
 	@Override

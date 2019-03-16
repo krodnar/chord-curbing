@@ -1,18 +1,28 @@
 package me.krodnar.sevenkey.models;
 
-import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class ConcreteChord {
 
 	private Key rootKey;
 	private Chord chord;
-	private TreeSet<Key> keys = new TreeSet<>();
+	private TreeSet<Key> keys;
 
 	public ConcreteChord(Chord chord, Key rootKey) {
 		this.rootKey = rootKey;
 		this.chord = chord;
 
+		setKeys(chord);
+	}
+
+	public void inverse(int inversion) {
+		chord = chord.inverse(inversion);
+		setKeys(chord);
+	}
+
+	private void setKeys(Chord chord) {
+		keys = new TreeSet<>();
 		TreeSet<Integer> keysIndex = chord.getKeysIndex(rootKey);
 		for (Integer index : keysIndex) {
 			keys.add(Key.getByIndex(index));
@@ -27,7 +37,7 @@ public class ConcreteChord {
 		return chord;
 	}
 
-	public Set<Key> getKeys() {
+	public SortedSet<Key> getKeys() {
 		return keys;
 	}
 
