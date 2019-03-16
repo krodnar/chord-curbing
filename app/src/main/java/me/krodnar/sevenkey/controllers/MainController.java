@@ -25,6 +25,12 @@ public class MainController implements Initializable {
 	@FXML
 	private HBox inversionsRoot;
 	@FXML
+	private HBox pickerModeRoot;
+	@FXML
+	private VBox tonalitiesRoot;
+	@FXML
+	private VBox degreesRoot;
+	@FXML
 	private VBox trainerRoot;
 	@FXML
 	private Button settingsButton;
@@ -50,6 +56,18 @@ public class MainController implements Initializable {
 							 new InversionsController(mainModel.getChordPicker()),
 							 inversionsRoot)
 					 .add(
+							 Resources.layout.PICKER_MODE.url(),
+							 new PickerModeController(mainModel.getChordPicker()),
+							 pickerModeRoot)
+					 .add(
+							 Resources.layout.TONALITIES.url(),
+							 new TonalitiesController(mainModel.getChordPicker()),
+							 tonalitiesRoot)
+					 .add(
+							 Resources.layout.DEGREES.url(),
+							 new DegreesController(mainModel.getChordPicker()),
+							 degreesRoot)
+					 .add(
 							 Resources.layout.TRAINER.url(),
 							 new TrainerController(mainModel.getTrainer()),
 							 trainerRoot)
@@ -66,9 +84,7 @@ public class MainController implements Initializable {
 			e.printStackTrace();
 		}
 
-		settingsButton.setOnAction(event -> {
-			App.setScreen(ScreenManager.Screen.SETTINGS);
-		});
+		settingsButton.setOnAction(event -> App.setScreen(ScreenManager.Screen.SETTINGS));
 	}
 
 	public void close() {

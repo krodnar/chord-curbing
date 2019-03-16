@@ -1,15 +1,20 @@
 package me.krodnar.sevenkey.engine;
 
-import me.krodnar.sevenkey.models.Chord;
-import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Note;
-import me.krodnar.sevenkey.models.Octave;
+import me.krodnar.sevenkey.models.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class ChordPicker {
 
+	public enum PickMode {
+		RANDOM, TONALITY
+	}
+
+	private static final List<Integer> INVERSIONS = List.of(0, 1, 2, 3, 4, 5, 6);
+	private static final List<Integer> DEGREES = List.of(0, 1, 2, 3, 4, 5, 6);
+
+	private PickMode pickMode = PickMode.RANDOM;
 	private ChordPickAlgorithm algorithm = new RandomChordPickAlgorithm(this);
 
 	private List<Chord> chords;
@@ -18,9 +23,15 @@ public class ChordPicker {
 	private Octave startOctave = Octave.CM;
 	private Octave endOctave = Octave.C9;
 
-	private Map<Chord, Boolean> chordsPool = new HashMap<>();
-	private List<Integer> inversionsPool = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
-	private Map<Note, Boolean> notesPool = new HashMap<>();
+	Map<Note, Boolean> notesPool = new HashMap<>();
+	Map<Chord, Boolean> chordsPool = new HashMap<>();
+	List<Integer> inversionsPool = new ArrayList<>(INVERSIONS);
+
+	Map<Tonality, Boolean> tonalitiesPool = new HashMap<>();
+	Map<Note, Boolean> majorNotesPool = new HashMap<>();
+	Map<Note, Boolean> minorNotesPool = new HashMap<>();
+	List<Integer> majorDegrees = new ArrayList<>(DEGREES);
+	List<Integer> minorDegrees = new ArrayList<>(DEGREES);
 
 	public ChordPicker(List<Chord> chords) {
 		this.chords = chords;
@@ -29,23 +40,44 @@ public class ChordPicker {
 		for (Note note : Note.values()) {
 			notesPool.put(note, true);
 		}
+
+		for (Note note : Tonality.MAJOR_NOTES) {
+			majorNotesPool.put(note, true);
+		}
+
+		for (Note note : Tonality.MINOR_NOTES) {
+			minorNotesPool.put(note, true);
+		}
+
+		for (TonalityType type : TonalityType.values()) {
+			tonalitiesPool.put(Tonality.of(type), true);
+		}
 	}
 
 	public ConcreteChord getChord() throws IllegalStateException {
-		List<Chord> chords = new ArrayList<>();
-		chordsPool.forEach((key, value) -> {
-			if (value) chords.add(key);
-		});
+		return algorithm.pickChord();
+	}
 
-		List<Note> notes = new ArrayList<>();
-		notesPool.forEach((key, value) -> {
-			if (value) notes.add(key);
-		});
+	public void setPickMode(PickMode pickMode) {
+		if (this.pickMode == pickMode) {
+			return;
+		}
 
-		algorithm.setChordsPool(chords);
-		algorithm.setInversionsPool(inversionsPool);
-		algorithm.setNotesPool(notes);
-		return algorithm.getChord();
+		this.pickMode = pickMode;
+
+		switch (pickMode) {
+
+			case RANDOM:
+				algorithm = new RandomChordPickAlgorithm(this);
+				break;
+			case TONALITY:
+				algorithm = new TonalityChordPickAlgorithm(this);
+				break;
+		}
+	}
+
+	public PickMode getPickMode() {
+		return pickMode;
 	}
 
 	public void includeType(String type) {
@@ -84,6 +116,42 @@ public class ChordPicker {
 
 	public void excludeNote(Note note) {
 		notesPool.put(note, false);
+	}
+
+	public void includeMajorTonalityNote(Note note) {
+		majorNotesPool.put(note, true);
+	}
+
+	public void excludeMajorTonalityNote(Note note) {
+		majorNotesPool.put(note, false);
+	}
+
+	public void includeMinorTonalityNote(Note note) {
+		minorNotesPool.put(note, true);
+	}
+
+	public void excludeMinorTonalityNote(Note note) {
+		minorNotesPool.put(note, false);
+	}
+
+	public void includeMajorDegree(int degree) {
+		if (!majorDegrees.contains(degree)) {
+			majorDegrees.add(degree);
+		}
+	}
+
+	public void excludeMajorDegree(int degree) {
+		majorDegrees.remove(((Integer) degree));
+	}
+
+	public void includeMinorDegree(int degree) {
+		if (!minorDegrees.contains(degree)) {
+			minorDegrees.add(degree);
+		}
+	}
+
+	public void excludeMinorDegree(int degree) {
+		minorDegrees.remove(((Integer) degree));
 	}
 
 	public void setStartOctave(Octave startOctave) {
