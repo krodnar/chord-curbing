@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.core.TrainerListener;
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Note;
+import me.krodnar.sevenkey.models.Key;
 import me.krodnar.sevenkey.resources.Resources;
 
 import java.net.URL;
@@ -54,22 +54,12 @@ public class TrainerController implements Initializable {
 	private class DefaultListener implements TrainerListener {
 
 		@Override
-		public void onStart() {
-			Platform.runLater(() -> nextChord());
-		}
-
-		@Override
-		public void onStop() {
-
-		}
-
-		@Override
 		public void onCorrectChord(ConcreteChord chord) {
 			Platform.runLater(() -> nextChord());
 		}
 
 		@Override
-		public void onWrongChord(ConcreteChord chord, Set<Note> pressedNotes) {
+		public void onWrongChord(ConcreteChord chord, Set<Key> pressedKeys) {
 
 		}
 
@@ -77,21 +67,21 @@ public class TrainerController implements Initializable {
 		public void onNextChord(ConcreteChord chord) {
 			Platform.runLater(() -> {
 				chordLabel.setText(chord.getNotation());
-				notesLabel.setText(Arrays.toString(chord.getNotes().toArray()));
+				notesLabel.setText(Arrays.toString(chord.getKeys().toArray()));
 			});
 		}
 
 		@Override
-		public void onNoteOn(Note pressed, Set<Note> allNotes) {
+		public void onNoteOn(Key pressed, Set<Key> allKeys) {
 			Platform.runLater(() -> pressedNotesLabel.setText(
-					Arrays.toString(allNotes.toArray())
+					Arrays.toString(allKeys.toArray())
 			));
 		}
 
 		@Override
-		public void onNoteOff(Note released, Set<Note> allNotes) {
+		public void onNoteOff(Key released, Set<Key> allKeys) {
 			Platform.runLater(() -> pressedNotesLabel.setText(
-					Arrays.toString(allNotes.toArray())
+					Arrays.toString(allKeys.toArray())
 			));
 		}
 	}

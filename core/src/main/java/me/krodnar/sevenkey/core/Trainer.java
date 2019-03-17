@@ -2,9 +2,9 @@ package me.krodnar.sevenkey.core;
 
 import me.krodnar.sevenkey.engine.ChordChecker;
 import me.krodnar.sevenkey.engine.ChordPicker;
-import me.krodnar.sevenkey.tools.MidiDeviceManager;
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Note;
+import me.krodnar.sevenkey.models.Key;
+import me.krodnar.sevenkey.tools.MidiDevicesManager;
 
 import javax.sound.midi.*;
 
@@ -13,7 +13,8 @@ public class Trainer {
 	private ChordChecker checker;
 	private ChordPicker picker;
 
-	private MidiDeviceManager deviceManager = new MidiDeviceManager();
+	private Receiver receiver;
+	private MidiDevicesManager devicesManager;
 	private TrainerListener listener;
 
 	public Trainer(ChordPicker picker) {
@@ -23,33 +24,34 @@ public class Trainer {
 	public Trainer(ChordChecker checker, ChordPicker picker) {
 		this.checker = checker;
 		this.picker = picker;
+		receiver = new CheckingReceiver();
+		devicesManager = new MidiDevicesManager(receiver);
 	}
 
-	public void start() throws MidiUnavailableException {
-		deviceManager.open();
-		deviceManager.getTransmitter().setReceiver(new CheckingReceiver());
+	public void addInput(MidiDevice device) throws MidiUnavailableException {
+		devicesManager.addDeviceIn(device);
+	}
 
-		if (listener != null) listener.onStart();
+	public void addOutput(MidiDevice device) throws MidiUnavailableException {
+		devicesManager.addDeviceOut(device);
+	}
+
+	public void removeInput(MidiDevice device) {
+		devicesManager.removeDeviceIn(device);
+	}
+
+	public void removeOutput(MidiDevice device) {
+		devicesManager.removeDeviceOut(device);
 	}
 
 	public void stop() {
-		deviceManager.close();
-		if (listener != null) listener.onStop();
+		devicesManager.close();
 	}
 
 	public void nextChord() throws IllegalStateException {
 		ConcreteChord chord = picker.getChord();
 		checker.setChord(chord);
 		if (listener != null) listener.onNextChord(chord);
-	}
-
-	public MidiDevice getDevice() {
-		return deviceManager.getDevice();
-	}
-
-	public void setDevice(MidiDevice device) throws MidiUnavailableException {
-		deviceManager.setDevice(device);
-		start();
 	}
 
 	public ChordChecker getChecker() {
@@ -82,16 +84,16 @@ public class Trainer {
 		public void send(MidiMessage midiMessage, long timeStamp) {
 			if (midiMessage instanceof ShortMessage) {
 				ShortMessage message = (ShortMessage) midiMessage;
-				Note note = Note.getByIndex(message.getData1());
+				Key key = Key.getByIndex(message.getData1());
 
 				int command = message.getCommand();
-				checker.noteCommand(note, command);
-				if (listener != null) listener.onNoteCommand(note, command, checker.getPressedNotes());
+				checker.noteCommand(key, command);
+				if (listener != null) listener.onNoteCommand(key, command, checker.getPressedKeys());
 
 				if (checker.check()) {
 					if (listener != null) listener.onCorrectChord(checker.getChord());
 				} else {
-					if (listener != null) listener.onWrongChord(checker.getChord(), checker.getPressedNotes());
+					if (listener != null) listener.onWrongChord(checker.getChord(), checker.getPressedKeys());
 				}
 			}
 		}

@@ -34,8 +34,7 @@ public class ChordReader {
 			if (line.startsWith("#")) {
 				currentType = line.substring(1);
 			} else if (!line.isEmpty()) {
-				Chord chord = parseChord(line);
-				chord.setType(currentType);
+				Chord chord = parseChord(currentType, line);
 				chords.add(chord);
 			}
 
@@ -47,8 +46,10 @@ public class ChordReader {
 		return chords;
 	}
 
-	private static Chord parseChord(String line) {
-		Chord chord = new Chord();
+	private static Chord parseChord(String type, String line) {
+		String naming = "";
+		List<Integer> steps = new ArrayList<>();
+		steps.add(0);
 
 		final Matcher matcher = pattern.matcher(line);
 
@@ -57,12 +58,12 @@ public class ChordReader {
 			String step = matcher.group(2);
 
 			if (subType != null) {
-				chord.setNaming(subType);
+				naming = subType;
 			} else {
-				chord.addStep(Integer.parseInt(step));
+				steps.add(Integer.parseInt(step));
 			}
 		}
 
-		return chord;
+		return new Chord(type, naming, 0, steps.stream().mapToInt(i -> i).toArray());
 	}
 }

@@ -1,7 +1,7 @@
 package me.krodnar.sevenkey.engine;
 
 import me.krodnar.sevenkey.models.ConcreteChord;
-import me.krodnar.sevenkey.models.Note;
+import me.krodnar.sevenkey.models.Key;
 
 import javax.sound.midi.ShortMessage;
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.TreeSet;
 public class ChordChecker {
 
 	private ConcreteChord chord;
-	private Set<Note> pressedNotes = new TreeSet<>();
+	private Set<Key> pressedKeys = new TreeSet<>();
 
 	public ChordChecker() {
 
@@ -20,12 +20,12 @@ public class ChordChecker {
 		return isCorrectChord();
 	}
 
-	private void noteOn(Note note) {
-		pressedNotes.add(note);
+	private void noteOn(Key key) {
+		pressedKeys.add(key);
 	}
 
-	private void noteOff(Note note) {
-		pressedNotes.remove(note);
+	private void noteOff(Key key) {
+		pressedKeys.remove(key);
 	}
 
 	public void setChord(ConcreteChord chord) {
@@ -33,19 +33,19 @@ public class ChordChecker {
 	}
 
 	public boolean isCorrectChord() {
-		return chord.getNotes().equals(pressedNotes);
+		return chord != null && chord.getKeys().equals(pressedKeys);
 	}
 
 	public ConcreteChord getChord() {
 		return chord;
 	}
 
-	public Set<Note> getPressedNotes() {
-		return pressedNotes;
+	public Set<Key> getPressedKeys() {
+		return pressedKeys;
 	}
 
-	public void noteCommand(Note note, int command) {
-		if (command == ShortMessage.NOTE_ON) noteOn(note);
-		else if (command == ShortMessage.NOTE_OFF) noteOff(note);
+	public void noteCommand(Key key, int command) {
+		if (command == ShortMessage.NOTE_ON) noteOn(key);
+		else if (command == ShortMessage.NOTE_OFF) noteOff(key);
 	}
 }

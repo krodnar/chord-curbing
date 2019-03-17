@@ -1,38 +1,39 @@
 package me.krodnar.sevenkey.models;
 
-import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class ConcreteChord {
 
-	private Note note;
+	private Key rootKey;
 	private Chord chord;
-	private TreeSet<Note> notes = new TreeSet<>();
+	private SortedSet<Key> keys = new TreeSet<>();
 
-	public ConcreteChord(Chord chord, Note note) {
-		this.note = note;
+	public ConcreteChord(Chord chord, Key rootKey) {
+		this.rootKey = rootKey;
 		this.chord = chord;
 
-		TreeSet<Integer> notesIndex = chord.getNotesIndex(note);
-		for (Integer index : notesIndex) {
-			notes.add(Note.getByIndex(index));
+		SortedSet<Integer> keysIndex = chord.getKeysIndex(rootKey);
+		for (Integer index : keysIndex) {
+			keys.add(Key.getByIndex(index));
 		}
 	}
 
-	public Note getNote() {
-		return note;
+	public Key getRootKey() {
+		return rootKey;
 	}
 
 	public Chord getChord() {
 		return chord;
 	}
 
-	public Set<Note> getNotes() {
-		return notes;
+	public SortedSet<Key> getKeys() {
+		return keys;
 	}
 
 	public String getNotation() {
-		String notation = note + " " + chord.getNaming();
+		String notation = rootKey + " " + chord.getNaming();
+
 		if (chord.isInverted()) {
 			notation += " (" + chord.getInversion() + " inversion)";
 		}
