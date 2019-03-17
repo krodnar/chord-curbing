@@ -49,6 +49,7 @@ public class ChordReader {
 	private static Chord parseChord(String type, String line) {
 		String naming = "";
 		List<Integer> steps = new ArrayList<>();
+		steps.add(0);
 
 		final Matcher matcher = pattern.matcher(line);
 

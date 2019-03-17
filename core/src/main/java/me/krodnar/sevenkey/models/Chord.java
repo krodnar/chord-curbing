@@ -32,7 +32,6 @@ public class Chord {
 		SortedSet<Integer> indices = new TreeSet<>();
 
 		int index = key.getIndex();
-		indices.add(index);
 		for (int i = 0; i < steps.length; i++) {
 			index += steps[i];
 			indices.add(i < inversion ? index + 12 : index);

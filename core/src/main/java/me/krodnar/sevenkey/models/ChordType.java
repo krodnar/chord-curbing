@@ -173,7 +173,10 @@ public enum ChordType {
 	ChordType(ChordGroup group, String name, int... steps) {
 		this.group = group;
 		this.name = name;
-		this.steps = steps;
+
+		this.steps = new int[steps.length + 1];
+		this.steps[0] = 0;
+		System.arraycopy(steps, 0, this.steps, 1, steps.length);
 	}
 
 	public ChordGroup getGroup() {
