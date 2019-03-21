@@ -27,20 +27,20 @@ public class App extends Application {
 
 		MainController mainController = new MainController(mainModel);
 		Parent main = FxmlUtils.load(Resources.layout.MAIN.url(), mainController);
-		Scene mainScene = new Scene(main);
 
 		SettingsController settingsController = new SettingsController(mainModel);
 		Parent settings = FxmlUtils.load(Resources.layout.SETTINGS.url(), settingsController);
-		Scene settingsScene = new Scene(settings);
 
-		screenManager = new ScreenManager(primaryStage);
+		Scene scene = new Scene(main);
+
+		screenManager = new ScreenManager(scene);
 		screenManager
-				.addScreen(settingsScene, ScreenManager.Screen.SETTINGS)
-				.addScreen(mainScene, ScreenManager.Screen.TRAINER);
+				.addScreen(main, ScreenManager.Screen.TRAINER)
+				.addScreen(settings, ScreenManager.Screen.SETTINGS);
 
 		primaryStage.setTitle(Resources.strings.app_name);
 		primaryStage.getIcons().add(new Image(Resources.drawable.FAVICON.stream()));
-		primaryStage.setScene(mainScene);
+		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(windowEvent -> mainController.close());
 		primaryStage.show();
 	}

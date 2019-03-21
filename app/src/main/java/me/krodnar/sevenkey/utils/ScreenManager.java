@@ -1,27 +1,27 @@
 package me.krodnar.sevenkey.utils;
 
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class ScreenManager {
 
-	private Stage stage;
-	private Map<Screen, Scene> screens = new HashMap<>();
+	private Scene scene;
+	private Map<Screen, Parent> screens = new EnumMap<>(Screen.class);
 
-	public ScreenManager(Stage stage) {
-		this.stage = stage;
+	public ScreenManager(Scene scene) {
+		this.scene = scene;
 	}
 
-	public ScreenManager addScreen(Scene scene, Screen screen) {
-		screens.put(screen, scene);
+	public ScreenManager addScreen(Parent parent, Screen screen) {
+		screens.put(screen, parent);
 		return this;
 	}
 
 	public void setScreen(Screen screen) {
-		stage.setScene(screens.get(screen));
+		scene.setRoot(screens.get(screen));
 	}
 
 	public enum Screen {
