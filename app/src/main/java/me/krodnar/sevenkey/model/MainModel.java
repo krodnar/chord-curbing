@@ -1,15 +1,12 @@
 package me.krodnar.sevenkey.model;
 
-import javafx.scene.control.Alert;
 import me.krodnar.sevenkey.core.Trainer;
 import me.krodnar.sevenkey.engine.ChordChecker;
 import me.krodnar.sevenkey.engine.ChordPicker;
 import me.krodnar.sevenkey.models.Chord;
-import me.krodnar.sevenkey.resources.Resources;
-import me.krodnar.sevenkey.tools.ChordReader;
+import me.krodnar.sevenkey.models.ChordType;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainModel {
@@ -43,15 +40,11 @@ public class MainModel {
 	}
 
 	private Trainer createTrainer() {
-		List<Chord> chords = new ArrayList<>();
+		List<Chord> chords = new LinkedList<>();
 
-		try {
-			chords = ChordReader.readChords(Resources.value.CHORDS.url());
-		} catch (IOException e) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setHeaderText(Resources.strings.error_chord_reader);
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
+		for (ChordType type : ChordType.values()) {
+			Chord chord = Chord.of(type);
+			chords.add(chord);
 		}
 
 		ChordPicker picker = new ChordPicker(chords);
