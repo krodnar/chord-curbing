@@ -20,11 +20,11 @@ public class ChordChecker {
 		return isCorrectChord();
 	}
 
-	private void noteOn(Key key) {
+	public void noteOn(Key key) {
 		pressedKeys.add(key);
 	}
 
-	private void noteOff(Key key) {
+	public void noteOff(Key key) {
 		pressedKeys.remove(key);
 	}
 
@@ -42,10 +42,5 @@ public class ChordChecker {
 
 	public Set<Key> getPressedKeys() {
 		return pressedKeys;
-	}
-
-	public void noteCommand(Key key, int command) {
-		if (command == ShortMessage.NOTE_ON) noteOn(key);
-		else if (command == ShortMessage.NOTE_OFF) noteOff(key);
 	}
 }

@@ -17,9 +17,4 @@ public interface TrainerListener {
 	void onNoteOn(Key pressed, Set<Key> allKeys);
 
 	void onNoteOff(Key released, Set<Key> allKeys);
-
-	default void onNoteCommand(Key key, int command, Set<Key> pressedKeys) {
-		if (command == ShortMessage.NOTE_ON) onNoteOn(key, pressedKeys);
-		else if (command == ShortMessage.NOTE_OFF) onNoteOff(key, pressedKeys);
-	}
 }

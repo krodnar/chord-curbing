@@ -98,8 +98,13 @@ public class Trainer {
 
 				Key key = Key.getByIndex(message.getData1());
 
-				checker.noteCommand(key, command);
-				if (listener != null) listener.onNoteCommand(key, command, checker.getPressedKeys());
+				if (command == ShortMessage.NOTE_ON) {
+					checker.noteOn(key);
+					if (listener != null) listener.onNoteOn(key, checker.getPressedKeys());
+				} else {
+					checker.noteOff(key);
+					if (listener != null) listener.onNoteOff(key, checker.getPressedKeys());
+				}
 
 				if (checker.check()) {
 					if (listener != null) listener.onCorrectChord(checker.getChord());
