@@ -84,9 +84,20 @@ public class Trainer {
 		public void send(MidiMessage midiMessage, long timeStamp) {
 			if (midiMessage instanceof ShortMessage) {
 				ShortMessage message = (ShortMessage) midiMessage;
-				Key key = Key.getByIndex(message.getData1());
 
 				int command = message.getCommand();
+				if (command != ShortMessage.NOTE_ON && command != ShortMessage.NOTE_OFF) {
+					return;
+				}
+
+				// seems like some devices/drivers use NOTE_ON command
+				// with 0 magnitude instead of NOTE_OFF command
+				if (message.getData2() == 0) {
+					command = ShortMessage.NOTE_OFF;
+				}
+
+				Key key = Key.getByIndex(message.getData1());
+
 				checker.noteCommand(key, command);
 				if (listener != null) listener.onNoteCommand(key, command, checker.getPressedKeys());
 
