@@ -11,7 +11,7 @@ Sus2 = R + 2s + 5s
 
 #Sixth Chords
 Maj6 = R + 4s + 3s + 2s
-Min6 = R + 3s + 4s + 2s
+MinMaj6 = R + 3s + 4s + 2s
 
 #Seventh Chords
 Maj7 = R + 4s + 3s + 4s
@@ -30,7 +30,6 @@ MinMaj7= R + 3s + 4s + 4s
 MinMaj7(b5) = R + 3s + 3s + 5s
 
 Aug7 = R + 4s + 4s + 2s
-AugMaj7 = R + 4s + 4s + 3s
 add6 = R + 4s + 3s + 2s + 1s
 
 #Ninth Chords
@@ -57,8 +56,6 @@ Dim7(9) = R + 3s + 3s + 3s + 5s
 Dim7(b9) = R + 3s + 3s + 3s + 4s
 Aug7(9)  = R + 4s + 4s + 2s + 4s
 Aug7(b9)  = R + 4s + 4s + 2s + 3s
-AugMaj7(9) = R + 4s + 4s + 3s + 3s
-AugMaj7(b9) = R + 4s + 4s + 3s + 2s
 
 #Eleven Chords
 maj7(9)(11) = R + 4s + 3s + 4s + 3s + 3s
@@ -102,10 +99,6 @@ Aug7(9)(11) = R + 4s + 4s + 2s + 4s + 3s
 Aug7(9)(#11) = R + 4s + 4s + 2s + 4s + 4s
 Aug7(b9)(11) = R + 4s + 4s + 2s + 3s + 4s
 Aug7(b9)(#11) = R + 4s + 4s + 2s + 3s + 5s
-AugMaj7(9)(11) = R + 4s + 4s + 3s + 3s + 3s
-AugMaj7(9)(#11) = R + 4s + 4s + 3s + 3s + 4s
-AugMaj7(b9)(11) = R + 4s + 4s + 3s + 2s + 4s
-AugMaj7(b9)(#11) = R + 4s + 4s + 3s + 2s + 5s
 
 #Thirteenth Chords
 maj7(9)(11) (13) = R + 4s + 3s + 4s + 3s + 3s + 4s
@@ -149,7 +142,3 @@ Aug7(9)(11) (13) = R + 4s + 4s + 2s + 4s + 3s + 4s
 Aug7(9)(#11) (13) = R + 4s + 4s + 2s + 4s + 4s + 3s
 Aug7(b9)(11) (13) = R + 4s + 4s + 2s + 3s + 4s + 4s
 Aug7(b9)(#11) (13) = R + 4s + 4s + 2s + 3s + 5s + 3s
-AugMaj7(9)(11) (13) = R + 4s + 4s + 3s + 3s + 3s + 4s
-AugMaj7(9)(#11) (13) = R + 4s + 4s + 3s + 3s + 4s + 3s
-AugMaj7(b9)(11) (13) = R + 4s + 4s + 3s + 2s + 4s + 4s
-AugMaj7(b9)(#11) (13) = R + 4s + 4s + 3s + 2s + 5s + 3s

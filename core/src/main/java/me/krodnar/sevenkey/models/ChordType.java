@@ -18,7 +18,7 @@ public enum ChordType {
 
 	//region Sixth
 	MAJ6(SIXTH, "Maj6", 4, 3, 2),
-	MIN6(SIXTH, "Min6", 3, 4, 2),
+	MINMAJ6(SIXTH, "MinMaj6", 3, 4, 2),
 	//endregion
 
 	//region Seventh
@@ -38,7 +38,6 @@ public enum ChordType {
 	MINMAJ7_B5(SEVENTH, "MinMaj7(b5)", 3, 3, 5),
 
 	AUG7(SEVENTH, "Aug7", 4, 4, 2),
-	AUGMAJ7(SEVENTH, "AugMaj7", 4, 4, 3),
 	ADD6(SEVENTH, "add6", 4, 3, 2, 1),
 	//endregion
 
@@ -66,8 +65,6 @@ public enum ChordType {
 
 	AUG7_9(NINTH, "Aug7(9) ", 4, 4, 2, 4),
 	AUG7_B9(NINTH, "Aug7(b9) ", 4, 4, 2, 3),
-	AUGMAJ7_9(NINTH, "AugMaj7(9)", 4, 4, 3, 3),
-	AUGMAJ7_B9(NINTH, "AugMaj7(b9)", 4, 4, 3, 2),
 	//endregion
 
 	//region Eleven
@@ -112,10 +109,6 @@ public enum ChordType {
 	AUG7_9_S11(ELEVEN, "Aug7(9)(#11)", 4, 4, 2, 4, 4),
 	AUG7_B9_11(ELEVEN, "Aug7(b9)(11)", 4, 4, 2, 3, 4),
 	AUG7_B9_S11(ELEVEN, "Aug7(b9)(#11)", 4, 4, 2, 3, 5),
-	AUGMAJ7_9_11(ELEVEN, "AugMaj7(9)(11)", 4, 4, 3, 3, 3),
-	AUGMAJ7_9_S11(ELEVEN, "AugMaj7(9)(#11)", 4, 4, 3, 3, 4),
-	AUGMAJ7_B9_11(ELEVEN, "AugMaj7(b9)(11)", 4, 4, 3, 2, 4),
-	AUGMAJ7_B9_S11(ELEVEN, "AugMaj7(b9)(#11)", 4, 4, 3, 2, 5),
 	//endregion
 
 	//region Thirteenth
@@ -159,11 +152,7 @@ public enum ChordType {
 	AUG7_9_11_13(THIRTEENTH, "Aug7(9)(11)(13)", 4, 4, 2, 4, 3, 4),
 	AUG7_9_S11_13(THIRTEENTH, "Aug7(9)(#11)(13)", 4, 4, 2, 4, 4, 3),
 	AUG7_B9_11_13(THIRTEENTH, "Aug7(b9)(11)(13)", 4, 4, 2, 3, 4, 4),
-	AUG7_B9_S11_13(THIRTEENTH, "Aug7(b9)(#11)(13)", 4, 4, 2, 3, 5, 3),
-	AUGMAJ7_9_11_13(THIRTEENTH, "AugMaj7(9)(11)(13)", 4, 4, 3, 3, 3, 4),
-	AUGMAJ7_9_S11_13(THIRTEENTH, "AugMaj7(9)(#11)(13)", 4, 4, 3, 3, 4, 3),
-	AUGMAJ7_B9_11_13(THIRTEENTH, "AugMaj7(b9)(11)(13)", 4, 4, 3, 2, 4, 4),
-	AUGMAJ7_B9_S11_13(THIRTEENTH, "AugMaj7(b9)(#11)(13)", 4, 4, 3, 2, 5, 3);
+	AUG7_B9_S11_13(THIRTEENTH, "Aug7(b9)(#11)(13)", 4, 4, 2, 3, 5, 3);
 	//endregion
 
 	private ChordGroup group;
